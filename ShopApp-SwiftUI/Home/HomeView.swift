@@ -10,9 +10,9 @@ import SwiftUI
 struct HomeView: View {
     
     @State var search = ""
+    @StateObject private var viewModel = ProductViewModel()
     var body: some View {
-        
-        VStack() {
+        ScrollView {
             HStack {
                 TextField("Search", text: $search)
                     .font(.subheadline)
@@ -49,10 +49,9 @@ struct HomeView: View {
             }
             CategoryNameView()
             Spacer()
-            SelectedCategoryView()
+            SelectedCategoryView(viewModel: viewModel)
         }
     }
-    
 }
 
 #Preview {

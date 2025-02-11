@@ -9,4 +9,5 @@ import SwiftUI
 
 extension Color {
     static let customAppColor = Color(red: 203/255, green: 49/255, blue: 122/255)
+    static let customNavyBlue = Color(red: 0/255, green: 0/255, blue: 139/255)
 }

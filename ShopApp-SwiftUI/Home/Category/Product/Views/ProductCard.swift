@@ -16,7 +16,7 @@ struct ProductCard: View {
         Button {
             
         } label: {
-            VStack {
+            VStack(alignment: .leading) {
                 ZStack(alignment: .topTrailing) {
                     Image(product.image)
                         .resizable()
@@ -36,14 +36,41 @@ struct ProductCard: View {
                     }
                 }
                 
-                Text(product.name)
-                    .font(.headline)
-                    .padding(.top, 5)
-                    .foregroundStyle(.black)
-                
-                Text("$\(product.price, specifier:"%.2f")")
-                    .font(.subheadline)
-                    .foregroundStyle(.gray)
+                VStack(alignment: .leading) {
+                    
+                    HStack(spacing: 4) {
+                        ForEach(0..<5) { _ in
+                            Image(systemName: "star.fill")
+                                .frame(width: 12, height: 12)
+                                .foregroundStyle(.yellow)
+                        }
+                        
+                        Text("(15)")
+                            .foregroundStyle(.gray)
+                            .font(.caption)
+                    }
+                    
+                    Text(product.name)
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                        .padding(.top, 2)
+                        .foregroundStyle(Color.customNavyBlue)
+                    
+                    HStack {
+                        Text("$350")
+                            .font(.caption)
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.gray)
+                            .strikethrough()
+                        
+                        Spacer()
+                        
+                        Text("$\(product.price, specifier:"%.2f")")
+                            .font(.caption)
+                            .fontWeight(.semibold)
+                            .foregroundStyle(Color.customNavyBlue)
+                    }
+                }
             }
             .frame(maxWidth: .infinity)
             .padding()

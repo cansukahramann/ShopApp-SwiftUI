@@ -34,6 +34,7 @@ struct HomeView: View {
                         .font(.headline)
                         .fontWeight(.semibold)
                         .padding()
+                        .foregroundStyle(Color.customNavyBlue)
                     Spacer()
                     Button {
                         

@@ -41,7 +41,7 @@ struct HomeView: View {
                         Text("See all")
                             .font(.title3)
                             .fontWeight(.semibold)
-                            .foregroundStyle(.pink)
+                            .foregroundStyle(Color.customAppColor)
                     }
                     .padding()
                 }

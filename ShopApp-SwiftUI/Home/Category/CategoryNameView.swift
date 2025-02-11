@@ -22,7 +22,7 @@ struct CategoryNameView: View {
                         Text(name)
                             .font(.headline)
                             .fontWeight(.semibold)
-                            .foregroundColor(.pink)
+                            .foregroundColor(Color.customAppColor)
                             .underline(selectedCategory == name, color: Color.pink)
                             .contentShape(Rectangle())
                             .padding()

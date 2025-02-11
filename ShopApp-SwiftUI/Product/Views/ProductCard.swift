@@ -25,30 +25,12 @@ struct ProductCard: View {
                         .cornerRadius(10)
                         .shadow(radius: 5)
                     
-                    Button {
-                        likedProducts[product.image, default: false].toggle()
-                    } label: {
-                        Image(systemName: likedProducts[product.image, default: false] ? "heart.fill" : "heart")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundStyle(.red)
-                            .padding(8)
-                    }
+                    FavoriteButton(product: product)
                 }
                 
                 VStack(alignment: .leading) {
                     
-                    HStack(spacing: 4) {
-                        ForEach(0..<5) { _ in
-                            Image(systemName: "star.fill")
-                                .frame(width: 12, height: 12)
-                                .foregroundStyle(.yellow)
-                        }
-                        
-                        Text("(15)")
-                            .foregroundStyle(.gray)
-                            .font(.caption)
-                    }
+                    RatingView()
                     
                     Text(product.name)
                         .font(.footnote)

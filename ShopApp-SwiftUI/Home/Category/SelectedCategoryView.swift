@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SelectedCategoryView: View {
     var viewModel: ProductViewModel
+    @Binding var selectedProduct: Product?
+    @State private var isTapped: Bool = false
     
     private let columns: [GridItem] = [
         .init(.flexible(), spacing: 10, alignment: .leading),
@@ -20,6 +22,12 @@ struct SelectedCategoryView: View {
             LazyVGrid(columns: columns, spacing: 10) {
                 ForEach(viewModel.product) { product in
                     ProductCard(product: product)
+                        .onTapGesture {
+                            withAnimation(.easeInOut(duration: 1.0)) {
+                                selectedProduct = product
+                                
+                            }
+                        }
                 }
             }
         }
@@ -27,5 +35,5 @@ struct SelectedCategoryView: View {
 }
 
 #Preview {
-    SelectedCategoryView(viewModel: ProductViewModel())
+    SelectedCategoryView(viewModel: ProductViewModel(), selectedProduct: .constant(nil))
 }

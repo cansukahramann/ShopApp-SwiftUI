@@ -13,9 +13,6 @@ struct ProductCard: View {
     @State private var likedProducts = [String : Bool]()
     
     var body: some View {
-        Button {
-            
-        } label: {
             VStack(alignment: .leading) {
                 ZStack(alignment: .topTrailing) {
                     Image(product.image)
@@ -56,7 +53,7 @@ struct ProductCard: View {
             }
             .frame(maxWidth: .infinity)
             .padding()
-        }
+        
     }
 }
 

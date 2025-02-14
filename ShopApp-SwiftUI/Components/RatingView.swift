@@ -20,6 +20,7 @@ struct RatingView: View {
             Text("(15)")
                 .foregroundStyle(.gray)
                 .font(.caption)
+                .padding()
         }
     }
 }

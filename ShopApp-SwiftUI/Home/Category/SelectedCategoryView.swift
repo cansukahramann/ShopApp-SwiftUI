@@ -25,7 +25,6 @@ struct SelectedCategoryView: View {
                         .onTapGesture {
                             withAnimation(.easeInOut(duration: 1.0)) {
                                 selectedProduct = product
-                                
                             }
                         }
                 }

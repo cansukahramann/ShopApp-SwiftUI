@@ -9,26 +9,14 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @State var search = ""
+    
     @StateObject private var viewModel = ProductViewModel()
     @State private var selectedProduct: Product?
     
     var body: some View {
         NavigationStack {
             ScrollView {
-                HStack {
-                    TextField("Search", text: $search)
-                        .font(.subheadline)
-                        .foregroundStyle(.gray)
-                    Spacer()
-                    Image(systemName: "magnifyingglass")
-                }
-                .padding()
-                .overlay(content: {
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(lineWidth: 1)
-                        .foregroundStyle(Color(.systemGray4))
-                })
+                SearchBar() 
                 .padding()
                 
                 VStack(spacing: 0) {
@@ -54,6 +42,7 @@ struct HomeView: View {
                 CategoryNameView()
                 Spacer()
                 SelectedCategoryView(viewModel: viewModel,selectedProduct: $selectedProduct)
+                    .padding()
             }
             .navigationDestination(item: $selectedProduct) { product in
                 ProductDetailView(product: product)

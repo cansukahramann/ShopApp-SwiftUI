@@ -12,6 +12,7 @@ struct ProductDetailView: View {
     let product: Product
     @State private var isPressed = false
     @State private var isBouncing = false
+    @State var digitData = 0
     
     var body: some View {
         ScrollView {
@@ -29,12 +30,16 @@ struct ProductDetailView: View {
                 }
                 
                 HStack(spacing: 5) {
-                    Text(product.name)
+                    Text(product.title)
                         .font(.title)
                         .fontWeight(.semibold)
                         .foregroundStyle(Color.customNavyBlue)
                     
                     Spacer()
+                    
+                    Text(product.category)
+                        .font(.title3)
+                        .foregroundStyle(.gray)
                    
                 }
                 .padding()
@@ -47,7 +52,8 @@ struct ProductDetailView: View {
                         .foregroundStyle(Color.customAppColor)
                     Spacer()
                     Button {
-                        
+                        guard digitData > 0 else { return }
+                        digitData -= 1
                     } label: {
                         Image(systemName: "minus")
                             .font(.footnote)
@@ -60,12 +66,12 @@ struct ProductDetailView: View {
                             }
                     }
                     
-                    Text("1")
+                    Text("\(digitData)")
                         .font(.title3)
                         .fontWeight(.semibold)
                         .foregroundStyle(Color.customNavyBlue)
                     Button {
-                        
+                        digitData += 1
                     } label: {
                         Image(systemName: "plus")
                             .font(.footnote)
@@ -99,8 +105,16 @@ struct ProductDetailView: View {
             }
         }
     }
+
 }
 
 #Preview {
-    ProductDetailView(product: Product(name: "Apple Watch", price: 699, image: "electronics"))
+    ProductDetailView(product: Product(
+        title: "Apple Watch",
+        price: 699,
+        image: "electronics",
+        category: "Electronics",
+        description: "sdlsdlsldlsdlsldldlsldlsdlsdllsdlsdlsldlds",
+        rating: Rating(rate: 5.0, count: 5)
+    ))
 }

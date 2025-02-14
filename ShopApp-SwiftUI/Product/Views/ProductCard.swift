@@ -13,46 +13,53 @@ struct ProductCard: View {
     @State private var likedProducts = [String : Bool]()
     
     var body: some View {
-            VStack(alignment: .leading) {
-                ZStack(alignment: .topTrailing) {
-                    Image(product.image)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(height: 180)
-                        .cornerRadius(10)
-                        .shadow(radius: 5)
-                    
-                    FavoriteButton(product: product)
-                }
+        VStack(alignment: .leading) {
+            ZStack(alignment: .topTrailing) {
+                Image(product.image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(height: 180)
+                    .cornerRadius(10)
+                    .shadow(radius: 5)
                 
-                VStack(alignment: .leading) {
-                    
-                    RatingView()
-                    
-                    Text(product.name)
-                        .font(.footnote)
+                FavoriteButton(product: product)
+            }
+            
+            VStack(alignment: .leading) {
+                
+                RatingView()
+                
+                Text(product.title)
+                    .font(.footnote)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(Color.customNavyBlue)
+                
+                HStack {
+                    Text("$350")
+                        .font(.caption)
                         .fontWeight(.semibold)
-                        .padding(.top, 2)
-                        .foregroundStyle(Color.customNavyBlue)
+                        .foregroundStyle(.gray)
+                        .strikethrough()
                     
-                    HStack {
-                        Text("$350")
-                            .font(.caption)
-                            .fontWeight(.semibold)
-                            .foregroundStyle(.gray)
-                            .strikethrough()
-                        
-                        Spacer()
-                        
-                        Text("$\(product.price, specifier:"%.2f")")
-                            .font(.caption)
-                            .fontWeight(.semibold)
-                            .foregroundStyle(Color.customNavyBlue)
-                    }
+                    Spacer()
+                    
+                    Text("$\(product.price, specifier:"%.2f")")
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(Color.customNavyBlue)
                 }
             }
-            .frame(maxWidth: .infinity)
             .padding()
+        }
+        .overlay(content: {
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(lineWidth: 1)
+                .fill(Color(.lightGray))
+                .shadow(radius: 5)
+        })
+        
+        .frame(maxWidth: .infinity)
+       
         
     }
 }
@@ -64,5 +71,5 @@ extension View {
 }
 
 #Preview {
-    ProductCard(product: Product(name: "Apple Watch", price: 699, image: "electronics"))
+    ProductCard(product: Product(title: "Apple Watch", price: 699, image: "electronics", category: "Electronics", description: "sdlsdlsldlsdlsldldlsldlsdlsdllsdlsdlsldlds", rating: Rating(rate: 5.0, count: 5)))
 }

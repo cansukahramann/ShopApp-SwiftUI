@@ -1,5 +1,5 @@
 //
-//  CategoryNameView.swift
+//  CategoryListView.swift
 //  ShopApp-SwiftUI
 //
 //  Created by Cansu Kahraman on 10.02.2025.
@@ -7,14 +7,16 @@
 
 import SwiftUI
 
-struct CategoryNameView: View {
+struct CategoryListView: View {
     
     var name = ["All", "Electronics","Jewelry" ,"Men's clothing",  "Women's clothing"]
     @State private var selectedCategory: String = "All"
     
     var body: some View {
-        ScrollView(.horizontal,showsIndicators: false, content: {
+        ScrollView(.horizontal,showsIndicators: false) {
             LazyHStack() {
+                contentInsetView(.horizontal(inset: 8))
+                
                 ForEach(name, id: \.self) { name in
                     Button {
                         selectedCategory = name
@@ -28,14 +30,12 @@ struct CategoryNameView: View {
                             .padding()
                     }
                 }
+                contentInsetView(.horizontal(inset: 8))
             }
-        })
-        .frame(height: 25)
-        .padding()
-        
+        }
     }
 }
 
 #Preview {
-    CategoryNameView()
+    CategoryListView()
 }

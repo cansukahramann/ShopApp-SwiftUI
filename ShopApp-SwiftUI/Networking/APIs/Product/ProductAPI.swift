@@ -9,27 +9,17 @@ import Foundation
 import Moya
 
 enum ProductAPI: TargetType {
-    case allCategories
+
     case singleProduct(id: Int)
-    case specificCategory(categoryName: String)
-    
     
     var path: String {
         switch self {
-        case .allCategories:
-            return "products/categories"
         case .singleProduct(let id):
             return  "products/\(id)"
-        case .specificCategory(let categoryName):
-           return  "products/category/\(categoryName)"
         }
     }
     
-    var method: Moya.Method {
-        .get
-    }
+    var method: Moya.Method { .get }
     
-    var task: Moya.Task {
-        .requestPlain
-    }
+    var task: Moya.Task { .requestPlain }
 }

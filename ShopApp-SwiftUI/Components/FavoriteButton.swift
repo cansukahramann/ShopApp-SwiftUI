@@ -9,14 +9,14 @@ import SwiftUI
 
 struct FavoriteButton: View {
     
-    var product: Product
-    @State private var likedProducts = [String : Bool]()
-    
+    let isFavorite: Bool
+    let onButtonTap: (() -> Void)
+
     var body: some View {
         Button {
-            likedProducts[product.image, default: false].toggle()
+            onButtonTap()
         } label: {
-            Image(systemName: likedProducts[product.image, default: false] ? "heart.fill" : "heart")
+            Image(systemName: Bool.random() ? "heart.fill" : "heart")
                 .resizable()
                 .frame(width: 20, height: 20)
                 .foregroundStyle(.red)
@@ -29,14 +29,3 @@ struct FavoriteButton: View {
         }
     }
 }
-//
-//#Preview {
-//    FavoriteButton(product: Product(
-//        title: "Apple Watch",
-//        price: 699,
-//        image: "electronics",
-//        category: "Electronics",
-//        description: "sdlsdlsldlsdlsldldlsldlsdlsdllsdlsdlsldlds",
-//        rating: Rating(rate: 5.0, count: 5)
-//    ))
-//}

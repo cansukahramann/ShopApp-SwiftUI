@@ -8,7 +8,7 @@
 import Foundation
 
 class Product: Identifiable, Hashable {
-    var id = UUID()
+    var id: Int
     var title: String
     var price: Double
     var image: String
@@ -16,7 +16,7 @@ class Product: Identifiable, Hashable {
     var description: String
     var rating: Rating
     
-    init(id: UUID = UUID() ,title: String, price: Double, image: String, category: String, description: String, rating: Rating) {
+    init(id: Int ,title: String, price: Double, image: String, category: String, description: String, rating: Rating) {
         self.id = id
         self.title = title
         self.price = price

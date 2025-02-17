@@ -110,6 +110,7 @@ struct ProductDetailView: View {
 
 #Preview {
     ProductDetailView(product: Product(
+        id: 1, 
         title: "Apple Watch",
         price: 699,
         image: "electronics",

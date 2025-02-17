@@ -14,7 +14,7 @@ struct ProfileView: View {
     var body: some View {
         
         VStack {
-            SearchBar()
+            SearchBar(search: .constant(""))
                 .padding()
             
             Spacer()
@@ -38,6 +38,7 @@ struct ProfileView: View {
                 Spacer()
                 FavoriteProductsView(product: [
                     Product(
+                        id: 1,
                         title: "iPhone 15",
                         price: 999.99,
                         image: "https://example.com/iphone15.jpg",
@@ -46,6 +47,7 @@ struct ProfileView: View {
                         rating: Rating(rate: 4.8, count: 1200)
                     ),
                     Product(
+                        id:1,
                         title: "MacBook Air",
                         price: 1299.99,
                         image: "https://example.com/macbook.jpg",

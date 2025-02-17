@@ -29,14 +29,14 @@ struct FavoriteButton: View {
         }
     }
 }
-
-#Preview {
-    FavoriteButton(product: Product(
-        title: "Apple Watch",
-        price: 699,
-        image: "electronics",
-        category: "Electronics",
-        description: "sdlsdlsldlsdlsldldlsldlsdlsdllsdlsdlsldlds",
-        rating: Rating(rate: 5.0, count: 5)
-    ))
-}
+//
+//#Preview {
+//    FavoriteButton(product: Product(
+//        title: "Apple Watch",
+//        price: 699,
+//        image: "electronics",
+//        category: "Electronics",
+//        description: "sdlsdlsldlsdlsldldlsldlsdlsdllsdlsdlsldlds",
+//        rating: Rating(rate: 5.0, count: 5)
+//    ))
+//}

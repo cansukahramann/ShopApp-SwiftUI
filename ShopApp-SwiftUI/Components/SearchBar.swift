@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchBar: View {
     
-    @State var search = ""
+    @Binding var search: String
     
     var body: some View {
         HStack(alignment: .top) {
@@ -29,5 +29,5 @@ struct SearchBar: View {
 }
 
 #Preview {
-    SearchBar()
+    SearchBar(search: .constant(""))
 }

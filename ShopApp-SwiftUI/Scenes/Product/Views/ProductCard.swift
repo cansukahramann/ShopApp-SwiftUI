@@ -10,7 +10,6 @@ import SwiftUI
 struct ProductCard: View {
     
     let product: Product
-    @State private var likedProducts = [String : Bool]()
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -22,7 +21,7 @@ struct ProductCard: View {
                     .cornerRadius(10)
                     .shadow(radius: 5)
                 
-                FavoriteButton(product: product)
+                FavoriteButton(isFavorite: Bool.random()) {}
             }
             
             VStack(alignment: .leading) {
@@ -51,24 +50,17 @@ struct ProductCard: View {
             }
             .padding()
         }
-        .overlay(content: {
+        .overlay {
             RoundedRectangle(cornerRadius: 12)
                 .stroke(lineWidth: 1)
                 .fill(Color(.lightGray))
                 .shadow(radius: 5)
-        })
-        
+        }
         .frame(maxWidth: .infinity)
-       
-        
     }
 }
 
-extension View {
-    func debugBackground(_ color: Color = .red) -> some View {
-        self.background(color)
-    }
-}
+
 
 #Preview {
     ProductCard(product: Product(id: 1, title: "Apple Watch", price: 699, image: "electronics", category: "Electronics", description: "sdlsdlsldlsdlsldldlsldlsdlsdllsdlsdlsldlds", rating: Rating(rate: 5.0, count: 5)))

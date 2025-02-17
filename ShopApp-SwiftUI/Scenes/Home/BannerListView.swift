@@ -12,33 +12,6 @@ struct BannerListView: View {
     var banner = ["banner1","banner2","banner3", "banner4", "banner5","banner6","banner7"]
     
     var body: some View {
-        VStack {
-            headerView
-            listView
-        }
-    }
-    
-    var headerView: some View {
-        HStack() {
-            Text("Popular Item")
-                .font(.headline)
-                .fontWeight(.semibold)
-                .padding()
-                .foregroundStyle(Color.customNavyBlue)
-            Spacer()
-            Button {
-                
-            } label: {
-                Text("See all")
-                    .font(.title3)
-                    .fontWeight(.semibold)
-                    .foregroundStyle(Color.customAppColor)
-            }
-            .padding([.leading, .trailing], 18)
-        }
-    }
-    
-    var listView: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(spacing: 12) {
                 contentInsetView(.horizontal(inset: 8))

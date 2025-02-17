@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ProductDetailView: View {
-    
     let product: Product
     @State private var isPressed = false
     @State private var isBouncing = false
@@ -25,7 +24,7 @@ struct ProductDetailView: View {
                         .shadow(radius: 5)
                         .clipShape(Rectangle())
                     
-                    FavoriteButton(product: product)
+                    FavoriteButton(isFavorite: Bool.random()) {}
                         .padding()
                 }
                 

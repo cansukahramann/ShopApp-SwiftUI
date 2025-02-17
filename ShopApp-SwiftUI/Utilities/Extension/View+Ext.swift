@@ -21,4 +21,8 @@ extension View {
             Color.clear.frame(width: inset)
         }
     }
+    
+    func debugBackground(_ color: Color = .red) -> some View {
+        self.background(color)
+    }
 }

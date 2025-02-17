@@ -17,7 +17,7 @@ struct FavoriteProductsView: View {
     
     var body: some View {
             LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(product) { product in
+                ForEach(product, id: \.self) { product in
                     ProductCard(product: product)
                         .onTapGesture {
                             withAnimation(.easeInOut(duration: 1.0)) {

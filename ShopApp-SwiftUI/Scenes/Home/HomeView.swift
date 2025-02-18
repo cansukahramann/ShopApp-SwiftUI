@@ -7,10 +7,33 @@
 
 import SwiftUI
 
+struct ViewDidLoadModifier: ViewModifier {
+    @State private var isFirstOnAppear = true
+    private let action: () -> Void
+    
+    init(action: @escaping () -> Void) {
+        self.action = action
+    }
+
+    func body(content: Content) -> some View {
+        content.onAppear {
+            guard isFirstOnAppear else { return }
+            action()
+            isFirstOnAppear.toggle()
+            
+        }
+    }
+}
+
 struct HomeView: View {
     
+    @StateObject private var viewModel: HomeViewModel
+    @State private var selectedProduct: Product?
     
-    @StateObject private var viewModel = ProductViewModel()
+    
+    init(viewModel: HomeViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
     
     var body: some View {
         ScrollView {
@@ -20,16 +43,22 @@ struct HomeView: View {
                 
                 
                 BannerListView()
-                   
-                CategoryListView()
                 
-                ProductListView(products: viewModel.product)
+                CategoryListView(categories: viewModel.categories, selectedCategory: $viewModel.selectedCategory )
+                
+                ProductListView(products: viewModel.products, selectedProduct: $selectedProduct)
                     .padding()
             }
         }
+        .navigationDestination(item: $selectedProduct) { product in
+            ProductDetailView(product: product)
+        }
+        .modifier(ViewDidLoadModifier{
+            viewModel.fetchCategories()
+        })
     }
 }
 
 #Preview {
-    HomeView()
+    HomeView(viewModel: .init(categoryService: .init()))
 }

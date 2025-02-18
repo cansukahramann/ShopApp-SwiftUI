@@ -23,7 +23,9 @@ final class HomeViewModel: ObservableObject {
         categoryService.fetchCategories { [weak self] result  in
             switch result {
             case .success(let model):
-                self?.categories = model.map { Category(name: $0)}
+                let categories = model.map { Category(name: $0.capitalized)}
+                self?.categories = [.init(name: "All")] + categories
+                self?.selectedCategory = self?.categories.first
             case .failure(let error):
                 print(error)
             }

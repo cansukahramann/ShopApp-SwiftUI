@@ -26,14 +26,8 @@ struct ViewDidLoadModifier: ViewModifier {
 }
 
 struct HomeView: View {
-    
-    @StateObject private var viewModel: HomeViewModel
+    @ObservedObject var viewModel: HomeViewModel
     @State private var selectedProduct: Product?
-    
-    
-    init(viewModel: HomeViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
     
     var body: some View {
         ScrollView {
@@ -53,7 +47,7 @@ struct HomeView: View {
         .navigationDestination(item: $selectedProduct) { product in
             ProductDetailView(product: product)
         }
-        onViewDidLoad {
+        .onViewDidLoad {
             viewModel.fetchCategories()
         }
     }

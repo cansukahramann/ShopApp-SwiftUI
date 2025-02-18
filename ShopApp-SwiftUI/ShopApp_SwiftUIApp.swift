@@ -9,15 +9,16 @@ import SwiftUI
 
 @main
 struct ShopApp_SwiftUIApp: App {
-    let homeViewModel: HomeViewModel = {
+    @StateObject private var homeViewModel: HomeViewModel = {
            let service = CategoryService()
            let viewModel = HomeViewModel(categoryService: service)
            return viewModel
        }()
     
     var body: some Scene {
-        WindowGroup { NavigationStack {
-            HomeView(viewModel: homeViewModel)
+        WindowGroup {
+            NavigationStack {
+                HomeView(viewModel: homeViewModel)
             }
         }
     }

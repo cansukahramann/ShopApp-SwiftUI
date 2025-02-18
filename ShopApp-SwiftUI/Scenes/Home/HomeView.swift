@@ -48,11 +48,11 @@ struct HomeView: View {
             ProductDetailView(product: product)
         }
         .onViewDidLoad {
-            viewModel.fetchCategories()
+            viewModel.fetchIntialData()
         }
     }
 }
 
 #Preview {
-    HomeView(viewModel: .init(categoryService: .init()))
+    HomeView(viewModel: .init())
 }

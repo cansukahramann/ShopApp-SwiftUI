@@ -9,11 +9,7 @@ import SwiftUI
 
 @main
 struct ShopApp_SwiftUIApp: App {
-    @StateObject private var homeViewModel: HomeViewModel = {
-           let service = CategoryService()
-           let viewModel = HomeViewModel(categoryService: service)
-           return viewModel
-       }()
+    @StateObject private var homeViewModel = HomeViewModel()
     
     var body: some Scene {
         WindowGroup {

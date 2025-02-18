@@ -12,20 +12,19 @@ final class HomeViewModel: ObservableObject {
     
     @Published private(set) var categories = [Category]()
     @Published var selectedCategory: Category?
+    private let dataLoader: HomeDataLoader
     
-    private let categoryService: CategoryService
-    
-    init(categoryService: CategoryService) {
-        self.categoryService = categoryService
+    init(dataLoader: HomeDataLoader = .init()) {
+        self.dataLoader = dataLoader
     }
     
-    func fetchCategories() {
-        categoryService.fetchCategories { [weak self] result  in
+    func fetchIntialData() {
+        dataLoader.fetchData { [weak self] result in
             switch result {
-            case .success(let model):
-                let categories = model.map { Category(name: $0.capitalized)}
-                self?.categories = [.init(name: "All")] + categories
-                self?.selectedCategory = self?.categories.first
+            case .success(let data):
+                self?.categories = data.categories
+                self?.products = data.products
+                
             case .failure(let error):
                 print(error)
             }

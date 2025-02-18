@@ -9,6 +9,8 @@ import SwiftUI
 
 struct RatingView: View {
     
+    let product: Product
+    
     var body: some View {
         HStack(spacing: 4) {
             ForEach(0..<5) { _ in
@@ -17,14 +19,10 @@ struct RatingView: View {
                     .foregroundStyle(.yellow)
             }
             
-            Text("(15)")
+            Text("\(product.rating.count)")
                 .foregroundStyle(.gray)
                 .font(.caption)
                 .padding()
         }
     }
-}
-
-#Preview {
-    RatingView()
 }

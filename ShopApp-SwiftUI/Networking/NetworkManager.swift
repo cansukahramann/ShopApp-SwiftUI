@@ -15,18 +15,13 @@ final class NetworkManager {
     static let shared = NetworkManager()
     private init() {}
     
-    enum Error: Swift.Error {
-           case connectionError
-           case failureStatusCode
-       }
-    
     func request(_ target: any TargetType, completion: @escaping (Result<(Data, HTTPURLResponse), Error>) -> Void) {
         provider.request(MultiTarget(target)) { result in
             switch result {
             case .success(let response):
                 completion(.success((response.data, response.response!)))
             case .failure(let error):
-                completion(.failure(Error.connectionError))
+                completion(.failure(error))
             }
         }
     }

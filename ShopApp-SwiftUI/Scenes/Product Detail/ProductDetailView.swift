@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ProductDetailView: View {
     let product: Product
@@ -17,7 +18,8 @@ struct ProductDetailView: View {
         ScrollView {
             VStack {
                 ZStack(alignment: .topTrailing) {
-                    Image(product.image)
+                    
+                    KFImage(URL(string: product.image))
                         .resizable()
                         .scaledToFill()
                         .frame(height: 392)
@@ -85,7 +87,7 @@ struct ProductDetailView: View {
                 }
                 .padding()
                 
-                Text("Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday essentials in the main compartment, and enjoy the comfort and durability for all-day adventures.")
+                Text(product.description)
                     .font(.title3)
                     .foregroundStyle(.gray)
                     .padding()

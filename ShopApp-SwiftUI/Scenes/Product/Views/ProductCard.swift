@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ProductCard: View {
     
@@ -14,10 +15,10 @@ struct ProductCard: View {
     var body: some View {
         VStack(alignment: .leading) {
             ZStack(alignment: .topTrailing) {
-                Image(product.image)
+                KFImage(URL(string: product.image))
                     .resizable()
                     .scaledToFill()
-                    .frame(height: 180)
+                    .frame(width: 180, height: 180)
                     .cornerRadius(10)
                     .shadow(radius: 5)
                 
@@ -26,7 +27,7 @@ struct ProductCard: View {
             
             VStack(alignment: .leading) {
                 
-                RatingView()
+                RatingView(product: product)
                 
                 Text(product.title)
                     .font(.footnote)

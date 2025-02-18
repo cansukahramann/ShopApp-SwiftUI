@@ -8,24 +8,23 @@
 import SwiftUI
 
 struct CategoryListView: View {
-    
-    var name = ["All", "Electronics","Jewelry" ,"Men's clothing",  "Women's clothing"]
-    @State private var selectedCategory: String = "All"
+    let categories: [Category]
+    @Binding var selectedCategory: Category?
     
     var body: some View {
         ScrollView(.horizontal,showsIndicators: false) {
             LazyHStack() {
                 contentInsetView(.horizontal(inset: 8))
                 
-                ForEach(name, id: \.self) { name in
+                ForEach(categories, id: \.self) { category in
                     Button {
-                        selectedCategory = name
+                        selectedCategory = category
                     } label: {
-                        Text(name)
+                        Text(category.name)
                             .font(.headline)
                             .fontWeight(.semibold)
                             .foregroundColor(Color.customAppColor)
-                            .underline(selectedCategory == name, color: Color.pink)
+                            .underline(selectedCategory == category, color: Color.pink)
                             .contentShape(Rectangle())
                             .padding()
                     }
@@ -38,5 +37,5 @@ struct CategoryListView: View {
 }
 
 #Preview {
-    CategoryListView()
+    CategoryListView(categories: [.init(name:"All"), .init(name: "Popular")], selectedCategory: .constant(.init(name: "All")))
 }

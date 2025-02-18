@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProductListView: View {
     let products: [Product]
-    @State private var selectedProduct: Product?
+    @Binding var selectedProduct: Product?
     
     private let columns: [GridItem] = [
         .init(.flexible(), spacing: 10, alignment: .leading),
@@ -25,12 +25,9 @@ struct ProductListView: View {
                     }
             }
         }
-        .navigationDestination(item: $selectedProduct) { product in
-            ProductDetailView(product: product)
-        }
     }
 }
 
 #Preview {
-    ProductListView(products: [])
+    ProductListView(products: [], selectedProduct: .constant(nil))
 }

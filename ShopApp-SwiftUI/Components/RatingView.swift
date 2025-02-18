@@ -12,17 +12,18 @@ struct RatingView: View {
     let product: Product
     
     var body: some View {
-        HStack(spacing: 4) {
+        HStack(spacing: 2) {
             ForEach(0..<5) { _ in
                 Image(systemName: "star.fill")
                     .frame(width: 12, height: 12)
                     .foregroundStyle(.yellow)
             }
             
-            Text("\(product.rating.count)")
+            Text("(\(product.rating.count))")
                 .foregroundStyle(.gray)
                 .font(.caption)
-                .padding()
+                .padding(.leading, 6)
+                
         }
     }
 }

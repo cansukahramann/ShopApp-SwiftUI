@@ -12,8 +12,8 @@ struct ProductListView: View {
     @Binding var selectedProduct: Product?
     
     private let columns: [GridItem] = [
-        .init(.flexible(), spacing: 10, alignment: .leading),
-        .init(.flexible(), spacing: 0, alignment: .trailing)
+        .init(.flexible(), spacing: 10),
+        .init(.flexible())
     ]
     
     var body: some View {

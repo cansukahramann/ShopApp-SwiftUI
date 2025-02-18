@@ -25,4 +25,8 @@ extension View {
     func debugBackground(_ color: Color = .red) -> some View {
         self.background(color)
     }
+    
+    func onViewDidLoad(action: @escaping () -> Void) -> some View {
+        self.modifier(ViewDidLoadModifier(action: action))
+    }
 }

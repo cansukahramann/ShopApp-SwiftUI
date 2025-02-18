@@ -53,9 +53,9 @@ struct HomeView: View {
         .navigationDestination(item: $selectedProduct) { product in
             ProductDetailView(product: product)
         }
-        .modifier(ViewDidLoadModifier{
+        onViewDidLoad {
             viewModel.fetchCategories()
-        })
+        }
     }
 }
 

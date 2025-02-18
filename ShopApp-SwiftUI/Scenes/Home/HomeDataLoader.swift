@@ -60,4 +60,15 @@ final class HomeDataLoader {
             }
         }
     }
+    
+    func fetchProductsByCategory(categoryName: String, completion: @escaping(Result<[Product], Error>) -> Void) {
+        categoryService.fetchProductsByCategory(categoryName: categoryName) { result in
+            switch result {
+            case .success(let model):
+                completion(.success(model.map(Product.init)))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }

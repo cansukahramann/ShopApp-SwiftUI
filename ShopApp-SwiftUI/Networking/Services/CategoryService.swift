@@ -13,4 +13,10 @@ struct CategoryService {
             completion(ResponseMapper.map($0))
         }
     }
+    
+    func fetchProductsByCategory(categoryName: String, completion: @escaping(Result<[ProductResponseModel], Error>) -> Void) {
+        NetworkManager.shared.request(CategoryAPI.specificCategory(categoryName: categoryName)) {
+            completion(ResponseMapper.map($0))
+        }
+    }
 }

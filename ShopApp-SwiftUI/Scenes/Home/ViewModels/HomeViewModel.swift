@@ -23,8 +23,20 @@ final class HomeViewModel: ObservableObject {
             switch result {
             case .success(let data):
                 self?.categories = data.categories
+                self?.selectedCategory = data.categories.first
                 self?.products = data.products
                 
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func fetchProductsByCategory(category: Category) {
+        dataLoader.fetchProductsByCategory(categoryName: category.name) { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.products = data
             case .failure(let error):
                 print(error)
             }

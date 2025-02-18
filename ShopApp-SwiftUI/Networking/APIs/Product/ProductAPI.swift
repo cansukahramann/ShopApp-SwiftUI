@@ -10,10 +10,13 @@ import Moya
 
 enum ProductAPI: TargetType {
 
+    case allProducts
     case singleProduct(id: Int)
     
     var path: String {
         switch self {
+        case .allProducts:
+            return "products"
         case .singleProduct(let id):
             return  "products/\(id)"
         }

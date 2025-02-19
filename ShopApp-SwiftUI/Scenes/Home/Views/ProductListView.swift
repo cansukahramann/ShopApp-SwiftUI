@@ -20,6 +20,7 @@ struct ProductListView: View {
         LazyVGrid(columns: columns, spacing: 10) {
             ForEach(products, id: \.self) { product in
                 ProductCard(product: product)
+                    .contentShape(Rectangle())
                     .onTapGesture {
                         selectedProduct = product
                     }

@@ -38,10 +38,11 @@ struct HomeView: View {
                 
                 BannerListView()
                 
-                CategoryListView(categories: viewModel.categories, selectedCategory: $viewModel.selectedCategory )
+                CategoryListView(categories: viewModel.categories, selectedCategory: $viewModel.selectedCategory)
                 
                 ProductListView(products: viewModel.products, selectedProduct: $selectedProduct)
                     .padding()
+                    
             }
         }
         .navigationDestination(item: $selectedProduct) { product in

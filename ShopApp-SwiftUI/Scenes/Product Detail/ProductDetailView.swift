@@ -15,38 +15,33 @@ struct ProductDetailView: View {
     @StateObject var viewModel: ProductDetailViewModel = .init()
     @State private var isInCart: Bool = false
     
+    @Environment(\.dismiss) var dismiss
+
     
     var body: some View {
         GeometryReader { geo in
-            ZStack(alignment: .bottom) {
+            ZStack() {
                 ScrollView {
-                    VStack() {
-                        ZStack(alignment: .topTrailing) {
-                            
-                            KFImage(URL(string: product.image))
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: geo.size.width, height: 392)
-                                .shadow(radius: 5)
-                                .clipShape(Rectangle())
-                                .clipped()
-                            
-                            FavoriteButton(isFavorite: Bool.random()) {}
-                                .padding()
-                        }
+                        KFImage(URL(string: product.image))
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .ignoresSafeArea(edges: .top)
                         
+                    VStack {
                         ProductHeaderView(product: product)
                         Divider()
                         
-                        
-                        
                         ProductDescriptionView(product: product)
                         Divider()
-                       
+                        
                     }
                 }
-    
+                
             }
+            .navigationBarBackButtonHidden()
+            .navigationBarItems(leading: BackButton(action: dismiss.callAsFunction), trailing: FavoriteButton(isFavorite: .random(), onButtonTap: {
+                
+            }))
             .safeAreaInset(edge: .bottom) {
                 AddToCardButtonView(isInCart: $isInCart)
             }
@@ -93,9 +88,14 @@ struct ProductHeaderView: View {
                 .font(.title3)
                 .foregroundStyle(.gray)
                 .frame(maxWidth: .infinity, alignment: .leading)
-           
-            PriceView(product: product)
-           
+            
+            HStack {
+                PriceView(product: product)
+                Spacer()
+                RatingView(product: product)
+                    .padding()
+            }
+         
         }
         .padding(.leading, 6)
     }
@@ -105,34 +105,15 @@ struct ProductDescriptionView: View {
     
     @StateObject var viewModel: ProductDetailViewModel = .init()
     let product: Product
-
+    
     var body: some View {
-        VStack {
-            HStack {
-                Text("Product Detail")
+        VStack(alignment: .leading) {
+            Text(product.description)
                     .font(.title3)
-                    .fontWeight(.semibold)
+                    .fontWeight(.bold)
                     .foregroundStyle(Color.customNavyBlue)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
-                Button {
-                    viewModel.showDetail()
-                } label: {
-                    Image(systemName: viewModel.isShowDetail ? "chevron.down" :  "chevron.right")
-                        .frame(width: 20, height: 20)
-                        .padding(15)
-                }
-                .foregroundStyle(Color.primary)
-            }
-            
-            if(viewModel.isShowDetail) {
-                Text(product.description)
-                    .font(.title3)
-                    .foregroundStyle(.gray)
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                    .padding(.bottom, 20)
-            }
-                
+                    .lineSpacing(8)
+                    .opacity(0.6)
         }
     }
 }
@@ -151,11 +132,11 @@ struct AddToCardButtonView: View {
             .overlay {
                 HStack(spacing: 12) {
                     Image(systemName: isInCart ? "cart.fill" : "cart")
-                            .font(.title)
-                            .frame(width: 45, height: 45)
-                            .foregroundStyle(Color.customNavyBlue)
-                
-        
+                        .font(.title)
+                        .frame(width: 45, height: 45)
+                        .foregroundStyle(Color.customNavyBlue)
+                    
+                    
                     Button {
                         isInCart = true
                     } label: {
@@ -171,5 +152,24 @@ struct AddToCardButtonView: View {
                     .disabled(isInCart)
                 }
             }
+    }
+}
+
+struct BackButton: View {
+    
+    let action: () -> Void
+    
+    var body: some View {
+        Button {
+            action()
+        } label: {
+            Image(systemName: "chevron.backward")
+                .foregroundStyle(Color.customNavyBlue)
+                .padding(.horizontal, 15)
+                .padding(.vertical, 10)
+                .background(Color.white)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+        }
+
     }
 }

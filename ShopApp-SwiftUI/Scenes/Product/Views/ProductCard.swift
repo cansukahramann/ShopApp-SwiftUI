@@ -21,10 +21,11 @@ struct ProductCard: View {
                 KFImage(URL(string: product.image))
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 180, height: 130)
+                    .frame(width: 130, height: 100)
                     .cornerRadius(10)
                     .shadow(radius: 5)
                     .clipped()
+                    .debugBackground()
                 
                 FavoriteButton(isFavorite: Bool.random()) {}
             }
@@ -57,12 +58,6 @@ struct ProductCard: View {
             Spacer()
         }
         .frame(width: 180)
-        .overlay {
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(lineWidth: 1)
-                .fill(Color(.lightGray))
-            
-        }
     }
     
 }

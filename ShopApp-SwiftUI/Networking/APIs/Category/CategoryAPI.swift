@@ -19,7 +19,7 @@ extension CategoryAPI: TargetType {
         case .allCategories:
             return "products/categories"
         case .specificCategory(let categoryName):
-            return  "products/category/\(categoryName)"
+            return "products/category/\(categoryName.lowercased())"
         }
     }
     

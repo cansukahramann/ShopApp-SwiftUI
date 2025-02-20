@@ -9,10 +9,12 @@
 /* Begin PBXBuildFile section */
 		7EB7F2F82D5F768C00961588 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 7EB7F2F72D5F768C00961588 /* Moya */; };
 		7ECB64382D64DA55006C4FB0 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 7ECB64372D64DA55006C4FB0 /* Kingfisher */; };
+		7EDBDDD22D67357700347500 /* CustomTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDBDDD12D67357700347500 /* CustomTabBarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7EA506582D5A1EAB00F6B459 /* ShopApp-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ShopApp-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EDBDDD12D67357700347500 /* CustomTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -40,6 +42,7 @@
 			isa = PBXGroup;
 			children = (
 				7EA506592D5A1EAB00F6B459 /* Products */,
+				7EDBDDD12D67357700347500 /* CustomTabBarView.swift */,
 				7E1F90272D633E810047377A /* ShopApp-SwiftUI */,
 				7EB7F2F62D5F768C00961588 /* Frameworks */,
 			);
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EDBDDD22D67357700347500 /* CustomTabBarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

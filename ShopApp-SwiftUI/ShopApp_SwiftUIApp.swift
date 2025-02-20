@@ -9,13 +9,19 @@ import SwiftUI
 
 @main
 struct ShopApp_SwiftUIApp: App {
-    @StateObject private var homeViewModel = HomeViewModel()
+    @State private var selectedTab: Tab = .home
     
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                HomeView(viewModel: homeViewModel)
+                ContentView()
             }
         }
     }
+}
+
+enum Tab: String, CaseIterable {
+    case home = "house"
+    case cart = "cart"
+    case profile = "person"
 }

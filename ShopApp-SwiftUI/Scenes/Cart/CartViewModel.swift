@@ -8,5 +8,5 @@
 import Foundation
 
 final class CartViewModel: ObservableObject {
-    @Published private(set) var products: [Product] = []
+    @Published private(set) var products: [Product] = [] 
 }

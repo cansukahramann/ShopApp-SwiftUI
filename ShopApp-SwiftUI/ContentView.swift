@@ -10,46 +10,25 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var homeViewModel = HomeViewModel()
     @StateObject private var cartViewModel = CartViewModel()
-
-    @State private var selectedTab: Tab = .home
-    
-    init() {
-        UITabBar.appearance().isHidden = true
-    }
+    @StateObject private var profileViewModel = ProfileViewModel()
     
     var body: some View {
-        ZStack(alignment: .bottom) {
-            VStack {
-                switch selectedTab {
-                case .home:
-                    HomeView(viewModel: homeViewModel)
-                case .cart:
-                    CartView(viewModel: cartViewModel)
-                case .profile:
-                    ProfileView()
+        TabView {
+            HomeView(viewModel: homeViewModel)
+                .tabItem {
+                    Image(systemName: "house")
+                    Text("Home")
                 }
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.white.ignoresSafeArea())
-            ZStack {
-                Spacer()
-                Rectangle()
-                    .fill(Color.white)
-                    .frame(height: 100)
-                    .ignoresSafeArea(.container, edges: .bottom)
-                
-                CustomTabBarView(selectedTab: $selectedTab)
-                    .frame(maxWidth: .infinity)
-                    .background(Color.white, in: RoundedRectangle(cornerRadius: 20))
-                    .shadow(radius: 10)
-                    .padding(.bottom, 20)
-            }
+            CartView(viewModel: cartViewModel)
+                .tabItem {
+                    Image(systemName: "cart")
+                    Text("Cart")
+                }
+            ProfileView(viewModel: profileViewModel)
+                .tabItem {
+                    Image(systemName: "person")
+                    Text("Profile")
+                }
         }
-
-        .ignoresSafeArea(.container, edges: .all)
     }
-}
-
-#Preview {
-    ContentView()
 }

@@ -9,7 +9,6 @@ import SwiftUI
 
 @main
 struct ShopApp_SwiftUIApp: App {
-    @State private var selectedTab: Tab = .home
     
     var body: some Scene {
         WindowGroup {
@@ -18,10 +17,4 @@ struct ShopApp_SwiftUIApp: App {
             }
         }
     }
-}
-
-enum Tab: String, CaseIterable {
-    case home = "house"
-    case cart = "cart"
-    case profile = "person"
 }

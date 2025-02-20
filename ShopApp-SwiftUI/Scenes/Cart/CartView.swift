@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct CartView: View {
-    let product: Product
+    
+    @ObservedObject var viewModel: CartViewModel
     @State private var digit: Int = 1
     
     var body: some View {
         ScrollView {
-            ForEach(0..<10, id: \.self) { _ in
+            ForEach(viewModel.products, id: \.self) { product in
                 HStack(spacing: 12) {
                     Image("electronics2")
                         .scaledToFill()
@@ -54,9 +55,6 @@ struct CartView: View {
     }
 }
 
-#Preview {
-    CartView(product: Product(id: 1, title: "dsasd", price: 2.3, image: "dsdsd", category: "dsdsd", description: "sdds", rating: Rating(rate: 1.2, count: 2)))
-}
 
 struct StepperView: View {
     let product: Product

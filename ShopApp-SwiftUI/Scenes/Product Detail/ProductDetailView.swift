@@ -15,12 +15,10 @@ struct ProductDetailView: View {
     @StateObject var viewModel: ProductDetailViewModel = .init()
     @State private var isInCart: Bool = false
     
-    @Environment(\.dismiss) var dismiss
-
-    
     var body: some View {
         GeometryReader { geo in
             ZStack() {
+
                 ScrollView {
                         KFImage(URL(string: product.image))
                             .resizable()
@@ -38,9 +36,8 @@ struct ProductDetailView: View {
                 }
                 
             }
-            .navigationBarBackButtonHidden()
-            .navigationBarItems(leading: BackButton(action: dismiss.callAsFunction), trailing: FavoriteButton(isFavorite: .random(), onButtonTap: {
-                
+
+            .navigationBarItems(trailing: FavoriteButton(isFavorite: .random(), onButtonTap: {
             }))
             .safeAreaInset(edge: .bottom) {
                 AddToCardButtonView(isInCart: $isInCart)
@@ -152,24 +149,5 @@ struct AddToCardButtonView: View {
                     .disabled(isInCart)
                 }
             }
-    }
-}
-
-struct BackButton: View {
-    
-    let action: () -> Void
-    
-    var body: some View {
-        Button {
-            action()
-        } label: {
-            Image(systemName: "chevron.backward")
-                .foregroundStyle(Color.customNavyBlue)
-                .padding(.horizontal, 15)
-                .padding(.vertical, 10)
-                .background(Color.white)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
-        }
-
     }
 }

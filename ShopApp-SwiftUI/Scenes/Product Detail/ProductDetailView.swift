@@ -67,51 +67,15 @@ struct ProductDetailView: View {
     ))
 }
 
-struct StepperView: View {
+struct PriceView: View {
     let product: Product
-    @Binding var digitData: Int
-
+    
     var body: some View {
-        HStack() {
-            
-        
-            
-            Spacer()
-            
-            Button {
-                guard digitData > 0 else { return }
-                digitData -= 1
-            } label: {
-                Image(systemName: "minus")
-                    .font(.footnote)
-                    .foregroundStyle(Color.white)
-                    .padding(10)
-                    .background {
-                        Circle()
-                            .fill(Color.accentColor)
-                            .frame(width: 28, height: 28)
-                    }
-            }
-            
-            Text("\(digitData)")
-                .font(.title3)
-                .fontWeight(.semibold)
-                .foregroundStyle(Color.customNavyBlue)
-            Button {
-                digitData += 1
-            } label: {
-                Image(systemName: "plus")
-                    .font(.footnote)
-                    .foregroundStyle(Color.white)
-                    .padding(10)
-                    .background {
-                        Circle()
-                            .fill(Color.accentColor)
-                            .frame(width: 28, height: 28)
-                    }
-            }
-        }
-        .padding()
+        Text("$\(product.price, specifier:"%.2f")")
+            .font(.title3)
+            .fontWeight(.semibold)
+            .foregroundStyle(Color.customAppColor)
+            .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
@@ -130,12 +94,8 @@ struct ProductHeaderView: View {
                 .foregroundStyle(.gray)
                 .frame(maxWidth: .infinity, alignment: .leading)
            
-            
-            Text("$\(product.price, specifier:"%.2f")")
-                .font(.title3)
-                .fontWeight(.semibold)
-                .foregroundStyle(Color.customAppColor)
-                .frame(maxWidth: .infinity, alignment: .leading)
+            PriceView(product: product)
+           
         }
         .padding(.leading, 6)
     }

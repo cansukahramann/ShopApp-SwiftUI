@@ -25,31 +25,6 @@ struct FavoriteProductsView: View {
                             }
                         }
                 }
-            .padding()
         }
     }
 }
-//
-//#Preview {
-//    FavoriteProductsView(product: [
-//        Product(
-//            id:
-//            title: "iPhone 15",
-//            price: 999.99,
-//            image: "https://example.com/iphone15.jpg",
-//            category: "Electronics",
-//            description: "Apple'ın en yeni akıllı telefonu.",
-//            rating: Rating(rate: 4.8, count: 1200)
-//        ),
-//        Product(
-//            title: "MacBook Air",
-//            price: 1299.99,
-//            image: "https://example.com/macbook.jpg",
-//            category: "Computers",
-//            description: "M2 çipli yeni MacBook Air.",
-//            rating: Rating(rate: 4.9, count: 800)
-//        )
-//    ],
-//    selectedProduct: .constant(nil)
-//)
-//}

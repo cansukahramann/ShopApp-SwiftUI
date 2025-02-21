@@ -5,9 +5,11 @@
 //  Created by Cansu Kahraman on 17.02.2025.
 //
 
-import Foundation
+import SwiftUI
 
 final class HomeViewModel: ObservableObject {
+    
+    @Published var isLoading = false
     @Published private(set) var products = [Product]()
     
     @Published private(set) var categories = [Category]()
@@ -26,6 +28,7 @@ final class HomeViewModel: ObservableObject {
     }
     
     func fetchIntialData() {
+        isLoading = true
         dataLoader.fetchData { [weak self] result in
             switch result {
             case .success(let data):
@@ -36,6 +39,7 @@ final class HomeViewModel: ObservableObject {
             case .failure(let error):
                 print(error)
             }
+            self?.isLoading = false
         }
     }
     

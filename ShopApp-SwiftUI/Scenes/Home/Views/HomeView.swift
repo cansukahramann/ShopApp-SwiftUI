@@ -42,6 +42,17 @@ struct HomeView: View {
                 
                 ProductListView(products: viewModel.products, selectedProduct: $selectedProduct)
                     .padding()
+                
+                if viewModel.isLoading {
+                    ZStack {
+                        Color(.systemBackground)
+                            .ignoresSafeArea()
+                        
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                            .scaleEffect(3)
+                    }
+                }
                     
             }
         }

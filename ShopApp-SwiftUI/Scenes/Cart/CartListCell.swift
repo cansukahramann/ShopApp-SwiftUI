@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct CartListCell: View {
     let product: Product
@@ -13,7 +14,7 @@ struct CartListCell: View {
     
     var body: some View {
         HStack(spacing: 10) {
-            Image(product.image)
+            KFImage(URL(string: product.image))
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 120, height: 180)
@@ -41,7 +42,7 @@ struct CartListCell: View {
                     PriceView(product: product)
                 }
             }
-            .padding(.leading)
+            .padding(20)
         }
     }
 }

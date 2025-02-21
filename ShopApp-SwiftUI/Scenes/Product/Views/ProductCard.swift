@@ -11,56 +11,32 @@ import Kingfisher
 struct ProductCard: View {
     
     let product: Product
-
+    
     var body: some View {
-        
-        VStack {
-            ZStack(alignment: .topTrailing) {
-                KFImage(URL(string: product.image))
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(height: 120)
-                    .cornerRadius(10)
-                    .shadow(radius: 5)
-                    .clipped()
-                
-                FavoriteButton(isFavorite: Bool.random()) {}
-            }
-            
+        GeometryReader { geo in
             VStack(alignment: .leading) {
-                
+                    KFImage(URL(string: product.image))
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: geo.size.width * 0.9, height: 100)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                    
                 Text(product.title)
-                    .font(.footnote)
+                    .font(.callout)
                     .fontWeight(.semibold)
-                    .foregroundStyle(Color.customNavyBlue)
                 
                 RatingView(product: product)
-                
-               
-                
-                HStack {
-                    Text("$350")
-                        .font(.caption)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.gray)
-                        .strikethrough()
-                    
-                    Spacer()
-                    
-                    Text("$\(product.price, specifier:"%.2f")")
-                        .font(.caption)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(Color.customNavyBlue)
-                }
+                PriceView(product: product)
+                Spacer(minLength: 0)
             }
             .padding()
-            Spacer()
+            .frame(width: geo.size.width, height: 260)
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(Color.white)
+                    .shadow(radius: 2)
+            )
         }
-        .frame(width: 180)
+        .frame(height: 260)
     }
-    
-}
-
-#Preview {
-    ProductCard(product: Product(id: 1, title: "Apple Watch", price: 699, image: "electronics", category: "Electronics", description: "sdlsdlsldlsdlsldldlsldlsdlsdllsdlsdlsldlds", rating: Rating(rate: 5.0, count: 5)))
 }

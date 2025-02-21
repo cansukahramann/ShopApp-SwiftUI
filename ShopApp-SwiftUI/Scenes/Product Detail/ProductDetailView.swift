@@ -18,13 +18,13 @@ struct ProductDetailView: View {
     var body: some View {
         GeometryReader { geo in
             ZStack() {
-
                 ScrollView {
-                        KFImage(URL(string: product.image))
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .ignoresSafeArea(edges: .top)
-                        
+                    KFImage(URL(string: product.image))
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .ignoresSafeArea(edges: .top)
+                        .frame(height: 250)
+                    
                     VStack {
                         ProductHeaderView(product: product)
                         Divider()
@@ -36,7 +36,7 @@ struct ProductDetailView: View {
                 }
                 
             }
-
+            
             .navigationBarItems(trailing: FavoriteButton(isFavorite: .random(), onButtonTap: {
             }))
             .safeAreaInset(edge: .bottom) {
@@ -92,7 +92,7 @@ struct ProductHeaderView: View {
                 RatingView(product: product)
                     .padding()
             }
-         
+            
         }
         .padding(.leading, 6)
     }
@@ -106,11 +106,11 @@ struct ProductDescriptionView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(product.description)
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .foregroundStyle(.black)
-                    .lineSpacing(8)
-                    .opacity(0.6)
+                .font(.title3)
+                .fontWeight(.bold)
+                .foregroundStyle(.black)
+                .lineSpacing(8)
+                .opacity(0.6)
         }
     }
 }
@@ -127,27 +127,19 @@ struct AddToCardButtonView: View {
             .frame(maxWidth: .infinity)
             .frame(height: 70)
             .overlay {
-                HStack(spacing: 12) {
-                    Image(systemName: isInCart ? "cart.fill" : "cart")
+                Button {
+                    isInCart = true
+                } label: {
+                    Text(isInCart ? "Added to Cart" : "Add to Cart")
                         .font(.title)
-                        .frame(width: 45, height: 45)
-                        .foregroundStyle(.black)
-                    
-                    
-                    Button {
-                        isInCart = true
-                    } label: {
-                        Text("Add to Cart")
-                            .font(.title)
-                            .fontWeight(.semibold)
-                            .foregroundStyle(.white)
-                            .frame(width: 280, height: 50)
-                            .background(isInCart ? Color.gray : .brown)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                            .shadow(color: isInCart ? .gray : .brown, radius: 8)
-                    }
-                    .disabled(isInCart)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.white)
+                        .frame(width: 380, height: 50)
+                        .background(isInCart ? Color.gray : .brown)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .shadow(color: isInCart ? .gray : .brown, radius: 8)
                 }
+                .disabled(isInCart)
             }
     }
 }

@@ -70,7 +70,7 @@ struct StepperView: View {
             Text("\(digitData)")
                 .font(.headline)
                 .fontWeight(.semibold)
-                .foregroundStyle(Color.customNavyBlue)
+                .foregroundStyle(.black)
             
             Button {
                 digitData += 1

@@ -66,7 +66,7 @@ struct PriceView: View {
         Text("$\(product.price, specifier:"%.2f")")
             .font(.title3)
             .fontWeight(.semibold)
-            .foregroundStyle(Color.customAppColor)
+            .foregroundStyle(.red)
             .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
@@ -78,7 +78,7 @@ struct ProductHeaderView: View {
             Text(product.title)
                 .font(.title)
                 .fontWeight(.semibold)
-                .foregroundStyle(Color.customNavyBlue)
+                .foregroundStyle(.black)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             Text(product.category)
@@ -108,7 +108,7 @@ struct ProductDescriptionView: View {
             Text(product.description)
                     .font(.title3)
                     .fontWeight(.bold)
-                    .foregroundStyle(Color.customNavyBlue)
+                    .foregroundStyle(.black)
                     .lineSpacing(8)
                     .opacity(0.6)
         }
@@ -131,7 +131,7 @@ struct AddToCardButtonView: View {
                     Image(systemName: isInCart ? "cart.fill" : "cart")
                         .font(.title)
                         .frame(width: 45, height: 45)
-                        .foregroundStyle(Color.customNavyBlue)
+                        .foregroundStyle(.black)
                     
                     
                     Button {
@@ -142,9 +142,9 @@ struct AddToCardButtonView: View {
                             .fontWeight(.semibold)
                             .foregroundStyle(.white)
                             .frame(width: 280, height: 50)
-                            .background(isInCart ? Color.gray : Color.customAppColor)
+                            .background(isInCart ? Color.gray : .brown)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
-                            .shadow(color: isInCart ? .gray : Color.customAppColor, radius: 8)
+                            .shadow(color: isInCart ? .gray : .brown, radius: 8)
                     }
                     .disabled(isInCart)
                 }

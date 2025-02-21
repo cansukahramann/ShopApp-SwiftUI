@@ -26,7 +26,7 @@ struct ProfileView: View {
                         Text("\(user.name.firstname) \(user.name.lastname)")
                             .font(.title3)
                             .fontWeight(.semibold)
-                            .foregroundStyle(Color.customNavyBlue)
+                            .foregroundStyle(.black)
                         
                         Text("\(user.email)")
                             .font(.headline)

@@ -23,8 +23,8 @@ struct CategoryListView: View {
                         Text(category.name)
                             .font(.headline)
                             .fontWeight(.semibold)
-                            .foregroundColor(Color.customAppColor)
-                            .underline(selectedCategory == category, color: Color.pink)
+                            .foregroundColor(.brown)
+                            .underline(selectedCategory == category, color: .brown)
                             .contentShape(Rectangle())
                             .padding()
                     }

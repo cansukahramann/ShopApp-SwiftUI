@@ -50,7 +50,7 @@ struct HomeView: View {
                         
                         ProgressView()
                             .progressViewStyle(.circular)
-                            .scaleEffect(3)
+                            .scaleEffect(2)
                     }
                 }
                     

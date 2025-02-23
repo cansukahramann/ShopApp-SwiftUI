@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RatingView: View {
     
-    let product: Product
+    let count: Int
     
     var body: some View {
         HStack(spacing: 2) {
@@ -19,7 +19,7 @@ struct RatingView: View {
                     .foregroundStyle(.yellow)
             }
             
-            Text("(\(product.rating.count))")
+            Text("(\(count))")
                 .foregroundStyle(.gray)
                 .font(.caption)
                 .padding(.leading, 6)

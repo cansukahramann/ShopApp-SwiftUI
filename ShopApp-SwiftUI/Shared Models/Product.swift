@@ -12,11 +12,11 @@ struct Product: Hashable, Identifiable {
     let title: String
     let price: Double
     let image: String
-    let category: String
-    let description: String
-    let rating: Rating
+    let category: String?
+    let description: String?
+    let rating: Rating?
     
-    init(id: Int, title: String, price: Double, image: String, category: String, description: String, rating: Rating) {
+    init(id: Int, title: String, price: Double, image: String, category: String?, description: String?, rating: Rating?) {
         self.id = id
         self.title = title
         self.price = price

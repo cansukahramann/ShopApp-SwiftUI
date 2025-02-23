@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct ProductResponseModel: Decodable {
-    struct Rating: Decodable {
+struct ProductResponseModel: Codable {
+    struct Rating: Codable {
         let rate: Double
         let count: Int
     }

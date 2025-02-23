@@ -9,27 +9,29 @@ import SwiftUI
 import Kingfisher
 
 struct ProductDetailView: View {
-    let product: Product
     @State private var isPressed = false
     @State private var isBouncing = false
-    @StateObject var viewModel: ProductDetailViewModel = .init()
-    @State private var isInCart: Bool = false
+    @StateObject var viewModel: ProductDetailViewModel
+    
+    init(product: Product) {
+        _viewModel = StateObject(wrappedValue: ProductDetailViewModel(product: product))
+    }
     
     var body: some View {
         GeometryReader { geo in
             ZStack() {
                 ScrollView {
-                    KFImage(URL(string: product.image))
+                    KFImage(URL(string: viewModel.product.image))
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .ignoresSafeArea(edges: .top)
                         .frame(height: 250)
                     
                     VStack {
-                        ProductHeaderView(product: product)
+                        ProductHeaderView(product: viewModel.product)
                         Divider()
                         
-                        ProductDescriptionView(product: product)
+                        ProductDescriptionView(description: viewModel.product.description!)
                         Divider()
                         
                     }
@@ -40,7 +42,9 @@ struct ProductDetailView: View {
             .navigationBarItems(trailing: FavoriteButton(isFavorite: .random(), onButtonTap: {
             }))
             .safeAreaInset(edge: .bottom) {
-                AddToCardButtonView(isInCart: $isInCart)
+                AddToCardButtonView(isInCart: viewModel.isInCart) {
+                    viewModel.addToCart()
+                }
             }
         }
     }
@@ -60,19 +64,20 @@ struct ProductDetailView: View {
 }
 
 struct PriceView: View {
-    let product: Product
+    let price: Double
     
     var body: some View {
-        Text("$\(product.price, specifier:"%.2f")")
+        Text("$\(price, specifier:"%.2f")")
             .font(.title3)
             .fontWeight(.semibold)
-            .foregroundStyle(.red)
+            .foregroundStyle(.black)
             .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
 struct ProductHeaderView: View {
     let product: Product
+    
     var body: some View {
         VStack(spacing: 12) {
             Text(product.title)
@@ -81,15 +86,15 @@ struct ProductHeaderView: View {
                 .foregroundStyle(.black)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Text(product.category)
+            Text(product.category!)
                 .font(.title3)
                 .foregroundStyle(.gray)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             HStack {
-                PriceView(product: product)
+                PriceView(price: product.price)
                 Spacer()
-                RatingView(product: product)
+                RatingView(count: product.rating!.count)
                     .padding()
             }
             
@@ -99,13 +104,11 @@ struct ProductHeaderView: View {
 }
 
 struct ProductDescriptionView: View {
-    
-    @StateObject var viewModel: ProductDetailViewModel = .init()
-    let product: Product
+    let description: String
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(product.description)
+            Text(description)
                 .font(.title3)
                 .fontWeight(.bold)
                 .foregroundStyle(.black)
@@ -117,8 +120,8 @@ struct ProductDescriptionView: View {
 
 
 struct AddToCardButtonView: View {
-    
-    @Binding var isInCart: Bool
+    let isInCart: Bool
+    let action: () -> Void
     
     var body: some View {
         Rectangle()
@@ -128,7 +131,7 @@ struct AddToCardButtonView: View {
             .frame(height: 70)
             .overlay {
                 Button {
-                    isInCart = true
+                    action()
                 } label: {
                     Text(isInCart ? "Added to Cart" : "Add to Cart")
                         .font(.title)

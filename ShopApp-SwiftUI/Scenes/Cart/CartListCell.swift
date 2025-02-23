@@ -39,7 +39,7 @@ struct CartListCell: View {
                 HStack {
                     StepperView(product: product, digitData: $digit)
                     
-                    PriceView(product: product)
+                    PriceView(price: product.price)
                 }
             }
             .padding(20)

@@ -44,6 +44,8 @@ final class HomeViewModel: ObservableObject {
     }
     
     private func fetchProductsByCategory(category: Category) {
+        isLoading = true
+        products = [] 
         if category.name == "All" {
             dataLoader.fetchData { [weak self] result in
                 switch result {
@@ -52,6 +54,7 @@ final class HomeViewModel: ObservableObject {
                 case .failure(let error):
                     print(error)
                 }
+                self?.isLoading = false
             }
         } else {
             dataLoader.fetchProductsByCategory(categoryName: category.name) { [weak self] result in
@@ -61,6 +64,7 @@ final class HomeViewModel: ObservableObject {
                 case .failure(let error):
                     print(error)
                 }
+                self?.isLoading = false
             }
         }
     }

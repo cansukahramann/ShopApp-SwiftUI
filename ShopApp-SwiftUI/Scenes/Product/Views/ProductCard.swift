@@ -25,8 +25,8 @@ struct ProductCard: View {
                     .font(.callout)
                     .fontWeight(.semibold)
                 
-                RatingView(product: product)
-                PriceView(product: product)
+                RatingView(count: product.rating!.count)
+                PriceView(price: product.price)
                 Spacer(minLength: 0)
             }
             .padding()

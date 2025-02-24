@@ -8,23 +8,23 @@
 import Foundation
 
 final class CartViewModel: ObservableObject {
-    @Published private(set) var products: [Product] = []
+    @Published private(set) var products: [CartProduct] = []
     
     init() {
-        self.products = CartManager.shared.products.map { Product(id: $0.product.id, title: $0.product.title, price: $0.product.price, image: $0.product.image, category: nil, description: nil, rating: nil)}
-        
-        NotificationCenter.default.addObserver(self, selector:  #selector(cartUpdated), name: .cartUpdated, object: nil)
-        
-        
+        products = CartManager.shared.products
     }
     
-    @objc private func cartUpdated() {
-        self.products = CartManager.shared.products.map { Product(id: $0.product.id, title: $0.product.title, price: $0.product.price, image: $0.product.image, category: nil, description: nil, rating: nil)}
+    func refresh() {
+        products = CartManager.shared.products
     }
     
-}
-
-extension Notification.Name {
+    func remove(_ product: CartProduct.Product) {
+        CartManager.shared.removeFromCart(product)
+        refresh()
+    }
     
-    static let cartUpdated = Notification.Name("cartUpdated")
+    func update(_ cartProduct: CartProduct) {
+        CartManager.shared.update(cartProduct)
+        refresh()
+    }
 }

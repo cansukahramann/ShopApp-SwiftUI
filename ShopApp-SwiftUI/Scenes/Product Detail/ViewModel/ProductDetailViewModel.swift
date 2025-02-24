@@ -14,11 +14,11 @@ final class ProductDetailViewModel: ObservableObject {
     
     init(product: Product) {
         self.product = product
-        isInCart = CartManager.shared.isInCart(.init(product))
+        isInCart = CartManager.shared.isInCart(product.id)
     }
     
     func addToCart() {
         CartManager.shared.addToCart(.init(product))
-        isInCart = CartManager.shared.isInCart(.init(product))
+        isInCart = CartManager.shared.isInCart(product.id)
     }
 }

@@ -11,8 +11,11 @@ struct CartView: View {
     @ObservedObject var viewModel: CartViewModel
     
     var body: some View {
-        List(viewModel.products) { product in
-            CartListCell(product: product)
+        List(viewModel.products, id: \.self) { product in
+            CartListCell(viewModel: viewModel, product: product)
+        }
+        .onAppear {
+            viewModel.refresh()
         }
     }
 }

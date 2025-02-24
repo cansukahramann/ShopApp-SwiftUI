@@ -18,11 +18,10 @@ final class CartManager {
         loadFromDisk()
     }
     
-    func addToCart(_ product: CodableProduct) {
+    func addToCart(_ product: CartProduct.Product) {
         performOperationThenSave {
             products.append(CartProduct(product: product, quantity: 1))
         }
-        NotificationCenter.default.post(name: .cartUpdated, object: nil)
     }
     
     func update(_ cartProduct: CartProduct) {
@@ -30,18 +29,16 @@ final class CartManager {
             guard let index = products.firstIndex(where: {$0.product.id == cartProduct.product.id }) else { return }
             products[index] = cartProduct
         }
-        NotificationCenter.default.post(name: .cartUpdated, object: nil)
     }
     
-    func removeFromCart(_ product: CodableProduct) {
+    func removeFromCart(_ product: CartProduct.Product) {
         performOperationThenSave {
             products.removeAll(where: {$0.product.id == product.id })
         }
-        NotificationCenter.default.post(name: .cartUpdated, object: nil)
     }
     
-    func isInCart(_ product: CodableProduct) -> Bool {
-        products.contains(where: { $0.product.id == product.id })
+    func isInCart(_ productID: Int) -> Bool {
+        products.contains(where: { $0.product.id == productID })
     }
     
     private func performOperationThenSave(_ operation: () -> Void) {
@@ -58,7 +55,9 @@ final class CartManager {
     }
     
     private func saveToDisk() {
-        guard let data = try? JSONEncoder().encode(products) else { return }
+        guard
+            let data = try? JSONEncoder().encode(products) else { return }
+        try? fileManager.createDirectory(at: storeURL.deletingLastPathComponent(), withIntermediateDirectories: true)
         try? data.write(to: storeURL)
     }
 }

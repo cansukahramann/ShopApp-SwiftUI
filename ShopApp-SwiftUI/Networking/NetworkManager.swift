@@ -8,7 +8,6 @@
 import Foundation
 import Moya
 
-
 final class NetworkManager {
     private let provider = MoyaProvider<MultiTarget>()
     

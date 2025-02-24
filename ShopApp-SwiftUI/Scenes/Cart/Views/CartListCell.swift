@@ -71,7 +71,7 @@ struct StepperView: View {
                     .background {
                         Circle()
                             .fill(Color.accentColor)
-                            .frame(width: 18, height: 18)
+                            .frame(width: 23, height: 23)
                     }
             }
             
@@ -90,11 +90,10 @@ struct StepperView: View {
                     .background {
                         Circle()
                             .fill(Color.accentColor)
-                            .frame(width: 18, height: 18)
+                            .frame(width: 23, height: 23)
                     }
             }
-        }.clipShape(Capsule())
-            .padding()
+        }
     }
 }
 

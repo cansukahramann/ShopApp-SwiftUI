@@ -25,7 +25,6 @@ struct CartView: View {
     private func delete(at offsets: IndexSet) {
         for index in offsets {
             let product = viewModel.products[index]
-            // `product.product` kısmını kullanarak doğru Product'ı geçiriyoruz
             viewModel.remove(product.product)
         }
     }

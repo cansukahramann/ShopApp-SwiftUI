@@ -9,9 +9,9 @@ import SwiftUI
 import Kingfisher
 
 struct CartListCell: View {
-    @ObservedObject var viewModel: CartViewModel
     let product: CartProduct
-    @State private var digit: Int = 1
+    let onUpdate: (CartProduct) -> Void
+
     
     var body: some View {
         HStack(spacing: 10) {
@@ -42,12 +42,11 @@ struct CartListCell: View {
                     StepperView(quantity: product.quantity) { newQuantitiy in
                         var updateProduct = product
                         updateProduct.quantity = newQuantitiy
-                        viewModel.update(updateProduct)
+                        onUpdate(updateProduct)
                     }
                     
                     PriceView(price: product.product.price)
                 }
-
             }
             .padding(20)
         }
@@ -59,7 +58,7 @@ struct StepperView: View {
     let onUpdate: (Int) -> Void
     
     var body: some View {
-        HStack() {
+        HStack {
             Button {
                 guard quantity > 0 else { return }
                 onUpdate(quantity - 1)
@@ -67,18 +66,22 @@ struct StepperView: View {
                 Image(systemName: "minus")
                     .font(.footnote)
                     .foregroundStyle(Color.white)
-                    .padding(10)
                     .background {
                         Circle()
                             .fill(Color.accentColor)
                             .frame(width: 23, height: 23)
                     }
             }
+ 
+            .buttonStyle(BorderlessButtonStyle())
             
             Text("\(quantity)")
-                .font(.headline)
+                .font(.footnote)
                 .fontWeight(.semibold)
                 .foregroundStyle(.black)
+                .frame(width: 25)
+                .truncationMode(.tail)
+         
             
             Button {
                 onUpdate(quantity + 1)
@@ -86,14 +89,16 @@ struct StepperView: View {
                 Image(systemName: "plus")
                     .font(.footnote)
                     .foregroundStyle(Color.white)
-                    .padding(10)
                     .background {
                         Circle()
                             .fill(Color.accentColor)
                             .frame(width: 23, height: 23)
+                         
                     }
             }
+            .buttonStyle(BorderlessButtonStyle())
         }
+        .padding()
     }
 }
 

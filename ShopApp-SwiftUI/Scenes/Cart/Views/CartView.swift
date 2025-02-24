@@ -13,7 +13,9 @@ struct CartView: View {
     var body: some View {
         List {
             ForEach(viewModel.products, id: \.self) { product in
-                CartListCell(viewModel: viewModel, product: product)
+                CartListCell(product: product) { updatedProduct in
+                    viewModel.update(updatedProduct)
+                }
             }
             .onDelete(perform: delete)
         }

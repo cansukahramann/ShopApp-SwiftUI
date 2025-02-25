@@ -20,7 +20,6 @@ struct ViewDidLoadModifier: ViewModifier {
             guard isFirstOnAppear else { return }
             action()
             isFirstOnAppear.toggle()
-            
         }
     }
 }
@@ -32,10 +31,6 @@ struct HomeView: View {
     var body: some View {
         ScrollView {
             LazyVStack(spacing: 12) {
-                SearchBar(search: .constant(""))
-                    .padding([.leading, .trailing], 18)
-                
-                
                 BannerListView()
                 
                 CategoryListView(categories: viewModel.categories, selectedCategory: $viewModel.selectedCategory)

@@ -24,14 +24,12 @@ struct BannerListView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                         .clipped()
                 }
-                
                 contentInsetView(.horizontal(inset: 8))
             }
         }
         .frame(height: 150)
     }
 }
-
 
 #Preview {
     BannerListView()

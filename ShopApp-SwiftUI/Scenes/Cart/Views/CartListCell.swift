@@ -11,7 +11,6 @@ import Kingfisher
 struct CartListCell: View {
     let product: CartProduct
     let onUpdate: (CartProduct) -> Void
-
     
     var body: some View {
         HStack(spacing: 10) {
@@ -36,7 +35,9 @@ struct CartListCell: View {
                     }
                     .foregroundStyle(Color.green)
                 }
+                
                 Spacer()
+                
                 HStack(spacing: 12) {
                   
                     StepperView(quantity: product.quantity) { newQuantitiy in
@@ -72,7 +73,6 @@ struct StepperView: View {
                             .frame(width: 23, height: 23)
                     }
             }
- 
             .buttonStyle(BorderlessButtonStyle())
             
             Text("\(quantity)")
@@ -82,7 +82,6 @@ struct StepperView: View {
                 .frame(width: 25)
                 .truncationMode(.tail)
          
-            
             Button {
                 onUpdate(quantity + 1)
             } label: {
@@ -93,7 +92,6 @@ struct StepperView: View {
                         Circle()
                             .fill(Color.accentColor)
                             .frame(width: 23, height: 23)
-                         
                     }
             }
             .buttonStyle(BorderlessButtonStyle())

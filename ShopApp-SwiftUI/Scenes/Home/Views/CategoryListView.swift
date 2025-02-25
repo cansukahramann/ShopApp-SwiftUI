@@ -31,10 +31,8 @@ struct CategoryListView: View {
                 }
                 contentInsetView(.horizontal(inset: 8))
             }
-          
         }
         .frame(height: 50)
-
     }
 }
 

@@ -10,6 +10,7 @@ import SwiftUI
 struct FavoriteProductsView: View {
     let product: [Product]
     @Binding var selectedProduct: Product?
+    
     private let columns: [GridItem] = [
         .init(.flexible(), spacing: 10, alignment: .leading),
         .init(.flexible(), spacing: 0, alignment: .trailing)

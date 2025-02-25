@@ -30,6 +30,7 @@ struct CartProduct: Codable, Hashable {
             image = product.image
         }
     }
+    
     let product: Product
     var quantity: Int
     
@@ -43,20 +44,5 @@ struct CartProduct: Codable, Hashable {
     
     func decreaseQuantity() -> CartProduct {
         CartProduct(product: product, quantity: quantity - 1)
-    }
-}
-
-final class FavoriteManager {
-    static let shared = FavoriteManager()
-    private init() {
-        // diskten yükle
-    }
-    
-    private func loadFromDisk() {
-        
-    }
-    
-    private func saveToDisk() {
-        
     }
 }

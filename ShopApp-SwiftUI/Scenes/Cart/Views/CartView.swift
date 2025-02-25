@@ -30,7 +30,6 @@ struct CartView: View {
             viewModel.remove(product.product)
         }
     }
-
 }
 
 #Preview{

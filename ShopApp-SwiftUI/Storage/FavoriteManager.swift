@@ -55,6 +55,7 @@ final class FavoriteManager {
         } else {
             addToFavorite(favoriteProduct)
         }
+        saveToDisk()
     }
     
     private func loadFromDisk() {

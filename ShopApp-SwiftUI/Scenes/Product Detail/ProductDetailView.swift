@@ -39,7 +39,8 @@ struct ProductDetailView: View {
                 
             }
             
-            .navigationBarItems(trailing: FavoriteButton(isFavorite: .random(), onButtonTap: {
+            .navigationBarItems(trailing: FavoriteButton(isFavorite: viewModel.isFavorite, onButtonTap: {
+                viewModel.toggleFavoriteState()
             }))
             .safeAreaInset(edge: .bottom) {
                 AddToCardButtonView(isInCart: viewModel.isInCart) {

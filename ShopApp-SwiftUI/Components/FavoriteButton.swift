@@ -16,7 +16,7 @@ struct FavoriteButton: View {
         Button {
             onButtonTap()
         } label: {
-            Image(systemName: Bool.random() ? "heart.fill" : "heart")
+            Image(systemName: isFavorite ? "heart.fill" : "heart")
                 .resizable()
                 .frame(width: 20, height: 20)
                 .foregroundStyle(.red)

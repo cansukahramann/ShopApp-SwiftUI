@@ -12,11 +12,12 @@ struct ContentView: View {
     @StateObject private var cartViewModel = CartViewModel()
     @StateObject private var profileViewModel = ProfileViewModel()
     
-    @State private var showOnboard: Bool = true
+    @State private var showOnboard: Bool =  UserDefaults.standard.bool(forKey: "hasSeenOnboarding")
     
     var body: some View {
         if showOnboard {
             OnboardView(showOnboard: $showOnboard)
+                .ignoresSafeArea()
         } else {
             TabView {
                 HomeView(viewModel: homeViewModel)
@@ -64,16 +65,11 @@ struct OnboardView: View {
 
 struct OnboardScreen: View {
     var imageName: String
-    
+
     var body: some View {
-        VStack {
-            Image(imageName)
-                .resizable()
-                .scaledToFill()
-                .frame(height: UIScreen.main.bounds.height * 0.3)
-                .ignoresSafeArea(edges: .top)
-                
-        }
+                Image(imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
     }
 }
 
@@ -83,15 +79,14 @@ struct LastOnboardScreen: View {
     
     var body: some View {
         ZStack {
-            Image("OnboardView3")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .ignoresSafeArea(.all)
-            
+                Image("OnboardView3")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+              
             VStack() {
                 Spacer()
                 Button {
+                    UserDefaults.standard.set(true, forKey: "hasSeenOnboarding")
                     showOnboard = false
                 } label: {
                     Text("Start Shopping")

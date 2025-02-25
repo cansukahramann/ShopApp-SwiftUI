@@ -32,6 +32,7 @@ struct ProductDetailView: View {
                         Divider()
                         
                         ProductDescriptionView(description: viewModel.product.description!)
+                            .padding(2)
                         Divider()
                         
                     }
@@ -50,18 +51,6 @@ struct ProductDetailView: View {
         }
     }
     
-}
-
-#Preview {
-    ProductDetailView(product: Product(
-        id: 1,
-        title: "Apple Watch",
-        price: 699,
-        image: "electronics",
-        category: "Electronics",
-        description: "sdlsdlsldlsdlsldldlsldlsdlsdllsdlsdlsldlds",
-        rating: Rating(rate: 5.0, count: 5)
-    ))
 }
 
 struct PriceView: View {
@@ -110,15 +99,13 @@ struct ProductDescriptionView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(description)
-                .font(.title3)
-                .fontWeight(.bold)
+                .font(.body)
+                .fontWeight(.semibold)
                 .foregroundStyle(.black)
                 .lineSpacing(8)
-                .opacity(0.6)
         }
     }
 }
-
 
 struct AddToCardButtonView: View {
     let isInCart: Bool

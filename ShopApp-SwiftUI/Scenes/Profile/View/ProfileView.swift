@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @ObservedObject var viewModel = ProfileViewModel()
+    @State var selectedProduct: Product?
     
     var body: some View {
         
@@ -36,26 +37,7 @@ struct ProfileView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
                 Spacer()
-                FavoriteProductsView(product: [
-                    Product(
-                        id: 1,
-                        title: "iPhone 15",
-                        price: 999.99,
-                        image: "https://example.com/iphone15.jpg",
-                        category: "Electronics",
-                        description: "Apple'ın en yeni akıllı telefonu.",
-                        rating: Rating(rate: 4.8, count: 1200)
-                    ),
-                    Product(
-                        id:1,
-                        title: "MacBook Air",
-                        price: 1299.99,
-                        image: "https://example.com/macbook.jpg",
-                        category: "Computers",
-                        description: "M2 çipli yeni MacBook Air.",
-                        rating: Rating(rate: 4.9, count: 800)
-                    )
-                ], selectedProduct: .constant(nil))
+                FavoriteProductsView(product: viewModel.products, selectedProduct: $selectedProduct)
             }.onAppear {
                 viewModel.fetchUserData()
             }

@@ -27,4 +27,8 @@ final class CartViewModel: ObservableObject {
         CartManager.shared.update(cartProduct)
         refresh()
     }
+    
+    func calculateTotalPrice() -> Double {
+        return products.reduce(0) { $0 + ($1.product.price * Double($1.quantity)) }
+    }
 }

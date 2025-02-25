@@ -8,8 +8,8 @@
 import Foundation
 
 class ProfileViewModel: ObservableObject {
-    @Published var user: User? 
-    
+    @Published var user: User?
+    @Published private(set) var products = [Product]()
     
     func fetchUserData() {
         // n eetwork reqeust

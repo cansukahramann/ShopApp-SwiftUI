@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var homeViewModel = HomeViewModel()
     @StateObject private var cartViewModel = CartViewModel()
-    @StateObject private var profileViewModel = ProfileViewModel()
+    @StateObject private var favoriteViewModel = FavoriteViewModel()
     
     @State private var showOnboard: Bool =  UserDefaults.standard.bool(forKey: "hasSeenOnboarding")
     
@@ -30,10 +30,10 @@ struct ContentView: View {
                         Image(systemName: "cart")
                         Text("Cart")
                     }
-                ProfileView(viewModel: profileViewModel)
+                FavoriteView(viewModel: favoriteViewModel)
                     .tabItem {
-                        Image(systemName: "person")
-                        Text("Profile")
+                        Image(systemName: "heart")
+                        Text("Favorite")
                     }
             }
         }

@@ -8,14 +8,15 @@
 import Foundation
 
 final class ProductDetailViewModel: ObservableObject {
-    @Published private(set) var isInCart = false
-    @Published private(set) var isFavorite: Bool = false
+    @Published private(set) var isInCart: Bool
+    @Published private(set) var isFavorite: Bool
 
     let product: Product
     
     init(product: Product) {
         self.product = product
         isInCart = CartManager.shared.isInCart(product.id)
+        isFavorite = FavoriteManager.shared.isFavorite(id: product.id)
     }
     
     func addToCart() {
@@ -24,7 +25,6 @@ final class ProductDetailViewModel: ObservableObject {
     }
     
     func toggleFavoriteState() {
-        
         FavoriteManager.shared.toggleFavoriteState(FavoriteProduct(product))
         isFavorite = FavoriteManager.shared.isFavorite(id: product.id)
     }

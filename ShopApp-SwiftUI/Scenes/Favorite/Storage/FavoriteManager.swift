@@ -7,21 +7,7 @@
 
 import Foundation
 
-struct FavoriteProduct: Hashable, Codable {
-    let id: Int
-    let name: String
-    let price: Double
-    let rateCount: Int?
-    let rate: Double?
-    
-    init(_ product: Product) {
-        id = product.id
-        name = product.title
-        price = product.price
-        rateCount = product.rating?.count
-        rate = product.rating?.rate
-    }
-}
+
 
 final class FavoriteManager {
     static let shared = FavoriteManager()
@@ -39,6 +25,16 @@ final class FavoriteManager {
         favorites.first { $0.id == id } != nil
     }
     
+    func toggleFavoriteState(_ favoriteProduct: FavoriteProduct) {
+        if isFavorite(id: favoriteProduct.id) {
+            removeFavorite(favoriteProduct)
+        } else {
+            addToFavorite(favoriteProduct)
+        }
+        
+        saveToDisk()
+    }
+    
     private func addToFavorite( _ favoriteProduct: FavoriteProduct) {
         favorites.append(favoriteProduct)
         saveToDisk()
@@ -49,19 +45,11 @@ final class FavoriteManager {
         saveToDisk()
     }
     
-    func toggleFavoriteState(_ favoriteProduct: FavoriteProduct) {
-        if isFavorite(id: favoriteProduct.id) {
-            removeFavorite(favoriteProduct)
-        } else {
-            addToFavorite(favoriteProduct)
-        }
-        saveToDisk()
-    }
-    
     private func loadFromDisk() {
-        let data = try! Data(contentsOf: storeURL)
-        let decoder = JSONDecoder()
-        favorites = try! decoder.decode([FavoriteProduct].self, from: data)
+        guard
+            let data = try? Data(contentsOf: storeURL),
+            let favorites = try? JSONDecoder().decode([FavoriteProduct].self, from: data) else { return }
+        self.favorites = favorites
     }
     
     private func saveToDisk() {

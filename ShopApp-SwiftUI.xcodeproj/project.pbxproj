@@ -7,9 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7EB7F2F82D5F768C00961588 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 7EB7F2F72D5F768C00961588 /* Moya */; };
-		7ECB64382D64DA55006C4FB0 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 7ECB64372D64DA55006C4FB0 /* Kingfisher */; };
+		7E4221DF2D6F02CE00011863 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7E4221DE2D6F02CE00011863 /* Lottie */; };
+		7E626ECB2D6E60B6000E5206 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 7E626ECA2D6E60B6000E5206 /* Kingfisher */; };
+		7E626ED22D6E60E9000E5206 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 7E626ED12D6E60E9000E5206 /* Moya */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7E5BA43C2D6E5F4D0081DA94 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		7EA506582D5A1EAB00F6B459 /* ShopApp-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ShopApp-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -28,8 +42,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7ECB64382D64DA55006C4FB0 /* Kingfisher in Frameworks */,
-				7EB7F2F82D5F768C00961588 /* Moya in Frameworks */,
+				7E626ECB2D6E60B6000E5206 /* Kingfisher in Frameworks */,
+				7E626ED22D6E60E9000E5206 /* Moya in Frameworks */,
+				7E4221DF2D6F02CE00011863 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -39,9 +54,9 @@
 		7EA5064F2D5A1EAB00F6B459 = {
 			isa = PBXGroup;
 			children = (
-				7EA506592D5A1EAB00F6B459 /* Products */,
 				7E1F90272D633E810047377A /* ShopApp-SwiftUI */,
 				7EB7F2F62D5F768C00961588 /* Frameworks */,
+				7EA506592D5A1EAB00F6B459 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -70,6 +85,7 @@
 				7EA506542D5A1EAB00F6B459 /* Sources */,
 				7EA506552D5A1EAB00F6B459 /* Frameworks */,
 				7EA506562D5A1EAB00F6B459 /* Resources */,
+				7E5BA43C2D6E5F4D0081DA94 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -80,8 +96,9 @@
 			);
 			name = "ShopApp-SwiftUI";
 			packageProductDependencies = (
-				7EB7F2F72D5F768C00961588 /* Moya */,
-				7ECB64372D64DA55006C4FB0 /* Kingfisher */,
+				7E626ECA2D6E60B6000E5206 /* Kingfisher */,
+				7E626ED12D6E60E9000E5206 /* Moya */,
+				7E4221DE2D6F02CE00011863 /* Lottie */,
 			);
 			productName = "ShopApp-SwiftUI";
 			productReference = 7EA506582D5A1EAB00F6B459 /* ShopApp-SwiftUI.app */;
@@ -112,8 +129,9 @@
 			mainGroup = 7EA5064F2D5A1EAB00F6B459;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				7EB7F2B42D5F65FC00961588 /* XCRemoteSwiftPackageReference "Moya" */,
-				7ECB64362D64DA55006C4FB0 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				7E626EC82D6E60A9000E5206 /* XCRemoteSwiftPackageReference "Moya" */,
+				7E626EC92D6E60B6000E5206 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				7E4221DD2D6F02CE00011863 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 7EA506592D5A1EAB00F6B459 /* Products */;
@@ -347,7 +365,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		7EB7F2B42D5F65FC00961588 /* XCRemoteSwiftPackageReference "Moya" */ = {
+		7E4221DD2D6F02CE00011863 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.1;
+			};
+		};
+		7E626EC82D6E60A9000E5206 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya.git";
 			requirement = {
@@ -355,7 +381,7 @@
 				minimumVersion = 15.0.3;
 			};
 		};
-		7ECB64362D64DA55006C4FB0 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+		7E626EC92D6E60B6000E5206 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
@@ -366,15 +392,20 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		7EB7F2F72D5F768C00961588 /* Moya */ = {
+		7E4221DE2D6F02CE00011863 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7EB7F2B42D5F65FC00961588 /* XCRemoteSwiftPackageReference "Moya" */;
-			productName = Moya;
+			package = 7E4221DD2D6F02CE00011863 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
-		7ECB64372D64DA55006C4FB0 /* Kingfisher */ = {
+		7E626ECA2D6E60B6000E5206 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7ECB64362D64DA55006C4FB0 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			package = 7E626EC92D6E60B6000E5206 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		7E626ED12D6E60E9000E5206 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7E626EC82D6E60A9000E5206 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -38,5 +38,6 @@ struct ProductCard: View {
             )
         }
         .frame(height: 260)
+        .contentShape(Rectangle())
     }
 }

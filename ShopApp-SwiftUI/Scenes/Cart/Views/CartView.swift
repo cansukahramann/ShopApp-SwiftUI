@@ -13,22 +13,25 @@ struct CartView: View {
     
     var body: some View {
         VStack {
-            List {
-                ForEach(viewModel.products, id: \.self) { product in
-                    CartListCell(product: product) { updatedProduct in
-                        viewModel.update(updatedProduct)
+            if viewModel.products.isEmpty {
+                EmptyCartView()
+            }
+            else {
+                List {
+                    ForEach(viewModel.products, id: \.self) { product in
+                        CartListCell(product: product) { updatedProduct in
+                            viewModel.update(updatedProduct)
+                        }
                     }
+                    .onDelete(perform: delete)
                 }
-                .onDelete(perform: delete)
-            }
-            .onAppear {
-                viewModel.refresh()
-            }
-            .listStyle(PlainListStyle())
-            .scrollIndicators(.hidden)
- 
-            PaymentView(viewModel: viewModel) {
-                UINotificationFeedbackGenerator().notificationOccurred(.success)
+                .onAppear {
+                    viewModel.refresh()
+                }
+                .listStyle(PlainListStyle())
+                .scrollIndicators(.hidden)
+                
+                PaymentView(viewModel: viewModel) { }
             }
         }
     }

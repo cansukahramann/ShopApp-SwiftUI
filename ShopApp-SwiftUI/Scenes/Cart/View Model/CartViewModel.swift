@@ -10,10 +10,6 @@ import Foundation
 final class CartViewModel: ObservableObject {
     @Published private(set) var products: [CartProduct] = []
     
-    init() {
-        products = CartManager.shared.products
-    }
-    
     func refresh() {
         products = CartManager.shared.products
     }

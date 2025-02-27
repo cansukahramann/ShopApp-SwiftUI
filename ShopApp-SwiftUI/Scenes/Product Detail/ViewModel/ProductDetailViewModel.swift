@@ -8,23 +8,44 @@
 import Foundation
 
 final class ProductDetailViewModel: ObservableObject {
+    @Published var isLoading = false
     @Published private(set) var isInCart: Bool
     @Published private(set) var isFavorite: Bool
-
-    let product: Product
+    @Published private(set) var product: Product?
     
-    init(product: Product) {
-        self.product = product
-        isInCart = CartManager.shared.isInCart(product.id)
-        isFavorite = FavoriteManager.shared.isFavorite(id: product.id)
+    private let id: Int
+    private let dataLoader: DetailDataLoader
+    
+    init(id: Int) {
+        self.id = id
+        
+        dataLoader = DetailDataLoader(id: id)
+        isInCart = CartManager.shared.isInCart(id)
+        isFavorite = FavoriteManager.shared.isFavorite(id: id)
+    }
+ 
+    func fetchProduct() {
+        isLoading = true
+        dataLoader.fetchProductDetail { [weak self] result in
+            switch result {
+            case .success(let product):
+                self?.product = product
+                
+            case .failure(let error):
+                print(error)
+            }
+            self?.isLoading = false
+        }
     }
     
     func addToCart() {
+        guard let product else { return }
         CartManager.shared.addToCart(.init(product))
         isInCart = CartManager.shared.isInCart(product.id)
     }
     
     func toggleFavoriteState() {
+        guard let product else { return }
         FavoriteManager.shared.toggleFavoriteState(FavoriteProduct(product))
         isFavorite = FavoriteManager.shared.isFavorite(id: product.id)
     }

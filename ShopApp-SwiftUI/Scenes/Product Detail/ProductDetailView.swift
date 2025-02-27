@@ -11,46 +11,63 @@ import Kingfisher
 struct ProductDetailView: View {
     @State private var isPressed = false
     @State private var isBouncing = false
-    @StateObject var viewModel: ProductDetailViewModel
+    @StateObject private var viewModel: ProductDetailViewModel
     
-    init(product: Product) {
-        _viewModel = StateObject(wrappedValue: ProductDetailViewModel(product: product))
+    init(id: Int) {
+        _viewModel = StateObject(wrappedValue: ProductDetailViewModel(id: id))
     }
     
     var body: some View {
-        GeometryReader { geo in
-            ZStack() {
-                ScrollView {
-                    KFImage(URL(string: viewModel.product.image))
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .ignoresSafeArea(edges: .top)
-                        .frame(height: 250)
-                    
-                    VStack {
-                        ProductHeaderView(product: viewModel.product)
-                        Divider()
-                        
-                        ProductDescriptionView(description: viewModel.product.description!)
-                            .padding(2)
-                        Divider()
+        ZStack {
+            if viewModel.isLoading {
+                ZStack {
+                    Color(.systemBackground)
+                        .ignoresSafeArea()
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .scaleEffect(2)
+                }
+            }
+            else if let product = viewModel.product {
+                GeometryReader { geo in
+                    ZStack() {
+                        ScrollView {
+                            KFImage(URL(string: product.image))
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .ignoresSafeArea(edges: .top)
+                                .frame(height: 250)
+                            
+                            VStack {
+                                ProductHeaderView(product: product)
+                                Divider()
+                                
+                                ProductDescriptionView(description: product.description!)
+                                    .padding(2)
+                                Divider()
+                                
+                            }
+                        }
                         
                     }
+                    
+                    .navigationBarItems(trailing: FavoriteButton(isFavorite: viewModel.isFavorite, onButtonTap: {
+                        viewModel.toggleFavoriteState()
+                    }))
+                    .safeAreaInset(edge: .bottom) {
+                        AddToCardButtonView(isInCart: viewModel.isInCart) {
+                            viewModel.addToCart()
+                        }
+                    }
                 }
-                
             }
-            
-            .navigationBarItems(trailing: FavoriteButton(isFavorite: viewModel.isFavorite, onButtonTap: {
-                viewModel.toggleFavoriteState()
-            }))
-            .safeAreaInset(edge: .bottom) {
-                AddToCardButtonView(isInCart: viewModel.isInCart) {
-                    viewModel.addToCart()
-                }
+            else {
+                EmptyView()
             }
+        }.onViewDidLoad {
+            viewModel.fetchProduct()
         }
     }
-    
 }
 
 struct PriceView: View {

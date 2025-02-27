@@ -19,12 +19,16 @@ struct ProductListView: View {
     var body: some View {
         LazyVGrid(columns: columns, spacing: 10) {
             ForEach(products, id: \.self) { product in
-                ProductCard(product: product)
+                ProductCard(model: cardModel(for: product))
                     .onTapGesture {
                         selectedProduct = product
                     }
             }
         }
+    }
+    
+    private func cardModel(for product: Product) -> ProductCardModel {
+        ProductCardModel(image: product.image, title: product.title, rateCount: product.rating?.count ?? 0, price: product.price)
     }
 }
 

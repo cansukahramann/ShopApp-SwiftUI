@@ -13,4 +13,10 @@ struct ProductService {
             completion(ResponseMapper.map($0))
         }
     }
+    
+    func fetchDetailProduct(id: Int, completion: @escaping(Result<ProductResponseModel, Error>) -> Void) {
+        NetworkManager.shared.request(ProductAPI.singleProduct(id: id)) {
+            completion(ResponseMapper.map($0))
+        }
+    }
 }

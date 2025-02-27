@@ -8,25 +8,31 @@
 import SwiftUI
 import Kingfisher
 
+struct ProductCardModel {
+    let image: String
+    let title: String
+    let rateCount: Int
+    let price: Double
+}
+
 struct ProductCard: View {
-    
-    let product: Product
+    let model: ProductCardModel
     
     var body: some View {
         GeometryReader { geo in
             VStack(alignment: .leading) {
-                    KFImage(URL(string: product.image))
+                    KFImage(URL(string: model.image))
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: geo.size.width * 0.9, height: 100)
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                     
-                Text(product.title)
+                Text(model.title)
                     .font(.callout)
                     .fontWeight(.semibold)
                 
-                RatingView(count: product.rating!.count)
-                PriceView(price: product.price)
+                RatingView(count: model.rateCount)
+                PriceView(price: model.price)
                 Spacer(minLength: 0)
             }
             .padding()

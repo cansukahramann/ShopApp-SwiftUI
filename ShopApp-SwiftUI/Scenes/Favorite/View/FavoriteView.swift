@@ -12,13 +12,10 @@ struct FavoriteView: View {
     @State private var selectedProduct: FavoriteProduct?
     
     var body: some View {
-        
-        
-        if viewModel.products.isEmpty {
-            EmptyFavoriteView()
-        }
-        else {
-            VStack {
+        VStack {
+            if viewModel.products.isEmpty {
+                EmptyFavoriteView()
+            } else {
                 SearchBar(search: .constant(""))
                     .padding()
                 
@@ -26,13 +23,12 @@ struct FavoriteView: View {
                     FavoriteProductsView(viewModel: viewModel, selectedProduct: $selectedProduct)
                 }
             }
-            .onAppear {
-                viewModel.refresh()
-            }
-            .navigationDestination(item: $selectedProduct) { product in
-                ProductDetailView(id: product.id)
-            }
         }
-        
+        .onAppear {
+            viewModel.refresh()
+        }
+        .navigationDestination(item: $selectedProduct) { product in
+            ProductDetailView(id: product.id)
+        }
     }
 }

@@ -52,7 +52,7 @@ struct HomeView: View {
             }
         }
         .navigationDestination(item: $selectedProduct) { product in
-            ProductDetailView(product: product)
+            ProductDetailView(id: product.id)
         }
         .onViewDidLoad {
             viewModel.fetchIntialData()

@@ -7,12 +7,9 @@
 
 import Foundation
 
-
-
 final class FavoriteManager {
     static let shared = FavoriteManager()
-    
-    private var favorites: [FavoriteProduct] = []
+    private(set) var favorites: [FavoriteProduct] = []
     
     private let fileManager = FileManager.default
     private lazy var storeURL = fileManager.urls(for: .documentationDirectory, in: .userDomainMask)[0].appending(path: "shop.store")

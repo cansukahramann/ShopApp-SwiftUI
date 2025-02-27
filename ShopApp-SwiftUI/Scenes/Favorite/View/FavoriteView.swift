@@ -7,26 +7,32 @@
 
 import SwiftUI
 
-
 struct FavoriteView: View {
-    @ObservedObject var viewModel = FavoriteViewModel()
-    @State var selectedProduct: Product?
+    @ObservedObject var viewModel: FavoriteViewModel
+    @State private var selectedProduct: FavoriteProduct?
     
     var body: some View {
         
-        VStack {
-            SearchBar(search: .constant(""))
-                .padding()
-            
-            Spacer()
         
-            ScrollView {
-              FavoriteProductsView(product: viewModel.products, selectedProduct: $selectedProduct)
+        if viewModel.products.isEmpty {
+            EmptyFavoriteView()
+        }
+        else {
+            VStack {
+                SearchBar(search: .constant(""))
+                    .padding()
+                
+                ScrollView {
+                    FavoriteProductsView(viewModel: viewModel, selectedProduct: $selectedProduct)
                 }
             }
+            .onAppear {
+                viewModel.refresh()
+            }
+            .navigationDestination(item: $selectedProduct) { product in
+                ProductDetailView(id: product.id)
+            }
         }
+        
     }
-
-#Preview {
-    FavoriteView()
 }

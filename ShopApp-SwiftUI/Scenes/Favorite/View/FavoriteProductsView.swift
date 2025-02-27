@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct FavoriteProductsView: View {
-    let product: [Product]
-    @Binding var selectedProduct: Product?
+    @ObservedObject var viewModel: FavoriteViewModel
+    @Binding var selectedProduct: FavoriteProduct?
     
     private let columns: [GridItem] = [
         .init(.flexible(), spacing: 10, alignment: .leading),
@@ -17,15 +17,13 @@ struct FavoriteProductsView: View {
     ]
     
     var body: some View {
-            LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(product, id: \.self) { product in
-                    ProductCard(product: product)
-                        .onTapGesture {
-                            withAnimation(.easeInOut(duration: 1.0)) {
-                                selectedProduct = product
-                            }
-                        }
-                }
+        LazyVGrid(columns: columns, spacing: 10) {
+            ForEach(viewModel.products, id: \.self) { product in
+                ProductCard(model: viewModel.cardModel(for: product))
+                    .onTapGesture {
+                        selectedProduct = product
+                    }
+            }
         }
     }
 }

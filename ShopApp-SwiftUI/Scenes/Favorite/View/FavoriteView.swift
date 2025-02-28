@@ -13,14 +13,20 @@ struct FavoriteView: View {
     
     var body: some View {
         VStack {
-            if viewModel.products.isEmpty {
+            if viewModel.hasNoFavoriteProduct {
                 EmptyFavoriteView()
             } else {
-                SearchBar(search: .constant(""))
+                SearchBar(search: $viewModel.searchText)
                     .padding()
                 
-                ScrollView {
-                    FavoriteProductsView(viewModel: viewModel, selectedProduct: $selectedProduct)
+                if viewModel.hasNoResultForSearching {
+                    Text("no result for search")
+                    Spacer()
+                } else {
+                    ScrollView {
+                        FavoriteProductsView(viewModel: viewModel, selectedProduct: $selectedProduct)
+                    }
+                    
                 }
             }
         }

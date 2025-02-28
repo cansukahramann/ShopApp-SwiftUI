@@ -25,8 +25,13 @@ struct CategoryListView: View {
                             .fontWeight(.semibold)
                             .foregroundColor(.brown)
                             .underline(selectedCategory == category, color: .brown)
-                            .contentShape(Rectangle())
                             .padding()
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 25)
+                                    .stroke(lineWidth: 1)
+                                    .fill(Color.brown)
+                                    .frame(height: 45)
+                            }
                     }
                 }
                 contentInsetView(.horizontal(inset: 8))

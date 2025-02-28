@@ -10,6 +10,7 @@ import PassKit
 
 struct ApplePaymentButton: View {
     var action: () -> Void
+    
     var body: some View {
         Representable(action: action)
             .frame(minWidth: 100, maxWidth: 200)

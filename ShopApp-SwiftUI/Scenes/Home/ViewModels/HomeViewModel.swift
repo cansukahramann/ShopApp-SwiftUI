@@ -8,10 +8,9 @@
 import SwiftUI
 
 final class HomeViewModel: ObservableObject {
-    
+    private let dataLoader: HomeDataLoader
     @Published var isLoading = false
     @Published private(set) var products = [Product]()
-    
     @Published private(set) var categories = [Category]()
     @Published var selectedCategory: Category? {
         didSet {
@@ -21,26 +20,8 @@ final class HomeViewModel: ObservableObject {
         }
     }
     
-    private let dataLoader: HomeDataLoader
-    
     init(dataLoader: HomeDataLoader = .init()) {
         self.dataLoader = dataLoader
-    }
-    
-    func fetchIntialData() {
-        isLoading = true
-        dataLoader.fetchData { [weak self] result in
-            switch result {
-            case .success(let data):
-                self?.categories = data.categories
-                self?.selectedCategory = data.categories.first
-                self?.products = data.products
-                
-            case .failure(let error):
-                print(error)
-            }
-            self?.isLoading = false
-        }
     }
     
     private func fetchProductsByCategory(category: Category) {
@@ -66,6 +47,22 @@ final class HomeViewModel: ObservableObject {
                 }
                 self?.isLoading = false
             }
+        }
+    }
+    
+    func fetchIntialData() {
+        isLoading = true
+        dataLoader.fetchData { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.categories = data.categories
+                self?.selectedCategory = data.categories.first
+                self?.products = data.products
+                
+            case .failure(let error):
+                print(error)
+            }
+            self?.isLoading = false
         }
     }
 }

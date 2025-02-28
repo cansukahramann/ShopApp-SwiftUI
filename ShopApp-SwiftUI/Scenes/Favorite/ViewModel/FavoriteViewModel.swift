@@ -29,7 +29,7 @@ final class FavoriteViewModel: ObservableObject {
     }
     
     func cardModel(for product: FavoriteProduct) -> ProductCardModel {
-        ProductCardModel(image: product.image, title: product.name, rateCount: product.rateCount ?? 0, price: product.price)
+        ProductCardModel(image: product.image, title: product.name, rate: product.rate ?? 0, rateCount: product.rateCount ?? 0, price: product.price)
     }
     
     private func filterProductsBySearch() {

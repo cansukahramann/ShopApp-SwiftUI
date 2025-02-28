@@ -28,7 +28,7 @@ struct ProductListView: View {
     }
     
     private func cardModel(for product: Product) -> ProductCardModel {
-        ProductCardModel(image: product.image, title: product.title, rateCount: product.rating?.count ?? 0, price: product.price)
+        ProductCardModel(image: product.image, title: product.title, rate: product.rating?.rate ?? 0, rateCount: product.rating?.count ?? 0, price: product.price)
     }
 }
 

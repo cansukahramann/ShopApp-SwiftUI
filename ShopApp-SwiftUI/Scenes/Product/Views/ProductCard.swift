@@ -11,6 +11,7 @@ import Kingfisher
 struct ProductCardModel {
     let image: String
     let title: String
+    let rate: Double
     let rateCount: Int
     let price: Double
 }
@@ -31,7 +32,7 @@ struct ProductCard: View {
                     .font(.callout)
                     .fontWeight(.semibold)
                 
-                RatingView(count: model.rateCount)
+                RatingView(rate: model.rate, count: model.rateCount)
                 PriceView(price: model.price)
                 Spacer(minLength: 0)
             }

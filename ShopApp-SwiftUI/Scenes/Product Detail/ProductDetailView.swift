@@ -101,7 +101,7 @@ struct ProductHeaderView: View {
             HStack {
                 PriceView(price: product.price)
                 Spacer()
-                RatingView(count: product.rating!.count)
+                RatingView(rate: product.rating!.rate, count: product.rating!.count)
                     .padding()
             }
             

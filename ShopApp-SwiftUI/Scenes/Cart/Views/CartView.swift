@@ -25,14 +25,13 @@ struct CartView: View {
                     }
                     .onDelete(perform: delete)
                 }
-                .onAppear {
-                    viewModel.refresh()
-                }
                 .listStyle(PlainListStyle())
                 .scrollIndicators(.hidden)
-                
                 PaymentView(viewModel: viewModel) { }
             }
+        }
+        .onAppear {
+            viewModel.refresh()
         }
     }
     
@@ -44,13 +43,6 @@ struct CartView: View {
     }
 }
 
-struct BottomSheetView: View {
-    
-    var body: some View {
-        Text("skkdk")
-    }
-}
-
 struct PaymentView: View {
     @ObservedObject var viewModel: CartViewModel
     var action: () -> Void
@@ -59,7 +51,6 @@ struct PaymentView: View {
     var body: some View {
         
         let totalPrice = viewModel.calculateTotalPrice()
-
         VStack {
             HStack {
                 VStack(spacing: 4) {

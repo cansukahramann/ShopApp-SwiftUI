@@ -14,7 +14,7 @@ struct ViewDidLoadModifier: ViewModifier {
     init(action: @escaping () -> Void) {
         self.action = action
     }
-
+    
     func body(content: Content) -> some View {
         content.onAppear {
             guard isFirstOnAppear else { return }
@@ -48,18 +48,11 @@ struct HomeView: View {
                             .scaleEffect(2)
                     }
                 }
-                    
+                
+            }
+            .onViewDidLoad {
+                viewModel.fetchIntialData()
             }
         }
-        .navigationDestination(item: $selectedProduct) { product in
-            ProductDetailView(id: product.id)
-        }
-        .onViewDidLoad {
-            viewModel.fetchIntialData()
-        }
     }
-}
-
-#Preview {
-    HomeView(viewModel: .init())
 }

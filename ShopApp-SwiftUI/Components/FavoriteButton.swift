@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct FavoriteButton: View {
-    
     let isFavorite: Bool
     let onButtonTap: (() -> Void)
 

@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct RatingView: View {
-    
     let rate: Double
     let count: Int
     
@@ -24,7 +23,6 @@ struct RatingView: View {
                 .foregroundStyle(.gray)
                 .font(.caption)
                 .padding(.leading, 6)
-                
         }
     }
 }

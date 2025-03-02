@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SearchBar: View {
-    
     @Binding var search: String
     
     var body: some View {
@@ -26,8 +25,4 @@ struct SearchBar: View {
                 .foregroundStyle(Color(.systemGray4))
         })
     }
-}
-
-#Preview {
-    SearchBar(search: .constant(""))
 }

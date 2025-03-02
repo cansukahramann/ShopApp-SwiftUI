@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LastOnboardingScreen: View {
     
-    @Binding var showOnboard: Bool
+    @Binding var hasSeenOnboarding: Bool
     
     var body: some View {
         ZStack {
@@ -19,9 +19,9 @@ struct LastOnboardingScreen: View {
               
             VStack() {
                 Spacer()
+                
                 Button {
-                    UserDefaults.standard.set(true, forKey: "hasSeenOnboarding")
-                    showOnboard = false
+                    hasSeenOnboarding = true
                 } label: {
                     Text("Start Shopping")
                         .fontWeight(.bold)

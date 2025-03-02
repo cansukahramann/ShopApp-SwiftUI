@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct OnboardingView: View {
-    @Binding var showOnboard: Bool
+    @Binding var hasSeenOnboarding: Bool
     @State private var selectedTab = 0
     
     var body: some View {
         TabView(selection: $selectedTab) {
             OnboardingImageView(imageName: "OnboardView1").tag(0)
             OnboardingImageView(imageName: "OnboardView2").tag(1)
-            LastOnboardingScreen(showOnboard: $showOnboard).tag(2)
+            LastOnboardingScreen(hasSeenOnboarding: $hasSeenOnboarding).tag(2)
         }
         .tabViewStyle(.page(indexDisplayMode: .always))
         .onAppear { applyPageControlAppearance() }

@@ -8,17 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding: Bool = false
     @StateObject private var homeViewModel = HomeViewModel()
     @StateObject private var cartViewModel = CartViewModel()
     @StateObject private var favoriteViewModel = FavoriteViewModel()
-    
-    @State private var showOnboard: Bool =  UserDefaults.standard.bool(forKey: "hasSeenOnboarding")
-    
+        
     var body: some View {
-        if showOnboard {
-            OnboardingView(showOnboard: $showOnboard)
-                .ignoresSafeArea()
-        } else {
+        if hasSeenOnboarding {
             TabView {
                 HomeView(viewModel: homeViewModel)
                     .tabItem {
@@ -36,7 +32,9 @@ struct ContentView: View {
                         Text("Favorite")
                     }
             }
+        } else {
+            OnboardingView(hasSeenOnboarding: $hasSeenOnboarding)
+                .ignoresSafeArea()
         }
-        
     }
 }

@@ -34,7 +34,7 @@ struct FavoriteView: View {
             viewModel.refresh()
         }
         .navigationDestination(item: $selectedProduct) { product in
-            ProductDetailView(id: product.id)
+            ProductDetailViewFactory.makeProductDetailView(product.id)
         }
     }
 }

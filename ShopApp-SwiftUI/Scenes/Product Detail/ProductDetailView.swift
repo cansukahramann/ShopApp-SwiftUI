@@ -13,8 +13,8 @@ struct ProductDetailView: View {
     @State private var isBouncing = false
     @StateObject private var viewModel: ProductDetailViewModel
     
-    init(id: Int) {
-        _viewModel = StateObject(wrappedValue: ProductDetailViewModel(id: id))
+    init(_ viewModel: ProductDetailViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
     
     var body: some View {

@@ -16,10 +16,10 @@ final class ProductDetailViewModel: ObservableObject {
     private let id: Int
     private let dataLoader: DetailDataLoader
     
-    init(id: Int) {
+    init(id: Int, dataLoader: DetailDataLoader) {
         self.id = id
+        self.dataLoader = dataLoader
         
-        dataLoader = DetailDataLoader(id: id)
         isInCart = CartManager.shared.isInCart(id)
         isFavorite = FavoriteManager.shared.isFavorite(id: id)
     }

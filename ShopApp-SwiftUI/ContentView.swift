@@ -16,7 +16,7 @@ struct ContentView: View {
     
     var body: some View {
         if showOnboard {
-            OnboardView(showOnboard: $showOnboard)
+            OnboardingView(showOnboard: $showOnboard)
                 .ignoresSafeArea()
         } else {
             TabView {
@@ -38,69 +38,5 @@ struct ContentView: View {
             }
         }
         
-    }
-}
-
-struct OnboardView: View {
-    
-    @Binding var showOnboard: Bool
-    @State private var selectedTab = 0
-    
-    var body: some View {
-        TabView(selection: $selectedTab) {
-            OnboardScreen(imageName: "OnboardView1")
-                .tag(0)
-            OnboardScreen(imageName: "OnboardView2")
-                .tag(1)
-            LastOnboardScreen(showOnboard: $showOnboard)
-                .tag(2)
-        }
-        .tabViewStyle(.page(indexDisplayMode: .always))
-        .onAppear {
-            UIPageControl.appearance().currentPageIndicatorTintColor = .black
-            UIPageControl.appearance().pageIndicatorTintColor = .brown
-        }
-    }
-}
-
-struct OnboardScreen: View {
-    var imageName: String
-
-    var body: some View {
-                Image(imageName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-    }
-}
-
-struct LastOnboardScreen: View {
-    
-    @Binding var showOnboard: Bool
-    
-    var body: some View {
-        ZStack {
-                Image("OnboardView3")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-              
-            VStack() {
-                Spacer()
-                Button {
-                    UserDefaults.standard.set(true, forKey: "hasSeenOnboarding")
-                    showOnboard = false
-                } label: {
-                    Text("Start Shopping")
-                        .fontWeight(.bold)
-                        .padding()
-                        .frame(width: 200, height: 50)
-                        .background(.brown)
-                        .foregroundStyle(.white)
-                        .clipShape(.buttonBorder)
-                        .shadow(radius: 3)
-                }
-                .padding(.bottom, 100)
-                
-            }
-        }
     }
 }

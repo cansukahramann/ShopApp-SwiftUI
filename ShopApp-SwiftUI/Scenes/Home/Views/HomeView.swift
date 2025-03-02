@@ -7,23 +7,6 @@
 
 import SwiftUI
 
-struct ViewDidLoadModifier: ViewModifier {
-    @State private var isFirstOnAppear = true
-    private let action: () -> Void
-    
-    init(action: @escaping () -> Void) {
-        self.action = action
-    }
-    
-    func body(content: Content) -> some View {
-        content.onAppear {
-            guard isFirstOnAppear else { return }
-            action()
-            isFirstOnAppear.toggle()
-        }
-    }
-}
-
 struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
     @State private var selectedProduct: Product?

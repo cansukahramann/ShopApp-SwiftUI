@@ -15,13 +15,18 @@ final class ProductDetailViewModel: ObservableObject {
     
     private let id: Int
     private let dataLoader: DetailDataLoader
+    private let cartManager: CartManager
+    private let favoriteManager: FavoriteManager
     
-    init(id: Int, dataLoader: DetailDataLoader) {
+    init(id: Int, dataLoader: DetailDataLoader, cartManager: CartManager, favoriteManager: FavoriteManager) {
         self.id = id
-        self.dataLoader = dataLoader
         
-        isInCart = CartManager.shared.isInCart(id)
-        isFavorite = FavoriteManager.shared.isFavorite(id: id)
+        self.dataLoader = dataLoader
+        self.cartManager = cartManager
+        self.favoriteManager = favoriteManager
+        
+        isInCart = cartManager.isInCart(id)
+        isFavorite = favoriteManager.isFavorite(id: id)
     }
  
     func fetchProduct() {
@@ -40,13 +45,13 @@ final class ProductDetailViewModel: ObservableObject {
     
     func addToCart() {
         guard let product else { return }
-        CartManager.shared.addToCart(.init(product))
-        isInCart = CartManager.shared.isInCart(product.id)
+        cartManager.addToCart(.init(product))
+        isInCart = cartManager.isInCart(product.id)
     }
     
     func toggleFavoriteState() {
         guard let product else { return }
-        FavoriteManager.shared.toggleFavoriteState(FavoriteProduct(product))
-        isFavorite = FavoriteManager.shared.isFavorite(id: product.id)
+        favoriteManager.toggleFavoriteState(FavoriteProduct(product))
+        isFavorite = favoriteManager.isFavorite(id: product.id)
     }
 }

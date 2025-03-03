@@ -44,6 +44,7 @@ struct ProductCard: View {
                     .shadow(radius: 2)
             )
         }
+        .padding(4)
         .frame(height: 260)
         .contentShape(Rectangle())
     }

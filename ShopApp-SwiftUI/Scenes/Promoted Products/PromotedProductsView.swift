@@ -22,7 +22,10 @@ struct PromotedProductsView: View {
                 LoadingIndicatorView()
                 
             case .display(let products):
-                ProductListView(products: products, selectedProduct: $selectedProduct)
+                ScrollView {
+                    ProductListView(products: products, selectedProduct: $selectedProduct)
+                        .padding([.leading, .trailing], 16)
+                }
                 
             case .displayError(let message):
                 ErrorView(message: message)
@@ -34,6 +37,7 @@ struct PromotedProductsView: View {
         .navigationDestination(item: $selectedProduct) { product in
             ProductDetailViewFactory.makeProductDetailView(product.id)
         }
+        .navigationTitle("Promoted Products")
     }
 }
 

@@ -12,6 +12,7 @@ struct LoadingIndicatorView: View {
         ZStack {
             Color(.systemBackground)
                 .ignoresSafeArea()
+            
             ProgressView()
                 .progressViewStyle(.circular)
                 .scaleEffect(2)

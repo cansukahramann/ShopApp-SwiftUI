@@ -22,43 +22,47 @@ struct ProductDetailView: View {
                 LoadingIndicatorView()
                 
             case .display(let product):
-                GeometryReader { geo in
-                    ZStack() {
-                        ScrollView {
-                            KFImage(URL(string: product.image))
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .ignoresSafeArea(edges: .top)
-                                .frame(height: 250)
-                            
-                            VStack {
-                                ProductHeaderView(product: product)
-                                Divider()
-                                
-                                ProductDescriptionView(description: product.description!)
-                                    .padding(2)
-                                Divider()
-                                
-                            }
-                        }
-                        
-                    }
-                    
-                    .navigationBarItems(trailing: FavoriteButton(isFavorite: viewModel.isFavorite, onButtonTap: {
-                        viewModel.toggleFavoriteState()
-                    }))
-                    .safeAreaInset(edge: .bottom) {
-                        AddToCardButtonView(isInCart: viewModel.isInCart) {
-                            viewModel.addToCart()
-                        }
-                    }
-                }
-            case .displayError:
-                Text("An error occurred! Please try again")
+                view(product)
+                
+            case .displayError(let message):
+                ErrorView(message: message)
             }
         }.onViewDidLoad {
             viewModel.fetchProduct()
         }
+    }
+    
+    func view(_ product: Product) -> some View {
+        GeometryReader { geo in
+            ScrollView {
+                KFImage(URL(string: product.image))
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .ignoresSafeArea(edges: .top)
+                    .frame(height: 250)
+                
+                VStack {
+                    ProductHeaderView(product: product)
+                    
+                    Divider()
+                    
+                    ProductDescriptionView(description: product.description!)
+                        .padding(2)
+                    
+                    Divider()
+                    
+                }
+            }
+            .navigationBarItems(trailing: FavoriteButton(isFavorite: viewModel.isFavorite, onButtonTap: {
+                viewModel.toggleFavoriteState()
+            }))
+            .safeAreaInset(edge: .bottom) {
+                AddToCardButtonView(isInCart: viewModel.isInCart) {
+                    viewModel.addToCart()
+                }
+            }
+        }
+        
     }
 }
 

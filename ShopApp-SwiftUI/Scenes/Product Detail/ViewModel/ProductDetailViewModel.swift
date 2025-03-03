@@ -8,7 +8,7 @@
 import Foundation
 
 final class ProductDetailViewModel: ObservableObject {
-    @Published var viewState: ViewState<Product> = .loading
+    @Published private(set) var viewState: ViewState<Product> = .loading
     @Published private(set) var isInCart: Bool
     @Published private(set) var isFavorite: Bool
     

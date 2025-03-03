@@ -20,19 +20,23 @@ struct PromotedProductsView: View {
             switch viewModel.viewState {
             case .loading:
                 LoadingIndicatorView()
-                 
+                
             case .display(let products):
                 ProductListView(products: products, selectedProduct: $selectedProduct)
                 
             case .displayError(let message):
                 ErrorView(message: message)
             }
-        }.navigationDestination(item: $selectedProduct) { product in
+        }
+        .onViewDidLoad {
+            viewModel.loadProducts()
+        }
+        .navigationDestination(item: $selectedProduct) { product in
             ProductDetailViewFactory.makeProductDetailView(product.id)
         }
     }
 }
 
 #Preview {
-    PromotedProductsView(viewModel: .init())
+    PromotedProductsViewFactory.makePreviewView()
 }

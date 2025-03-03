@@ -8,10 +8,9 @@
 import Foundation
 
 final class ProductDetailViewModel: ObservableObject {
-    @Published var isLoading = false
+    @Published var viewState: ViewState<Product> = .loading
     @Published private(set) var isInCart: Bool
     @Published private(set) var isFavorite: Bool
-    @Published private(set) var product: Product?
     
     private let id: Int
     private let dataLoader: DetailDataLoader
@@ -28,29 +27,28 @@ final class ProductDetailViewModel: ObservableObject {
         isInCart = cartManager.isInCart(id)
         isFavorite = favoriteManager.isFavorite(id: id)
     }
- 
+    
     func fetchProduct() {
-        isLoading = true
+        viewState = .loading
         dataLoader.fetchProductDetail { [weak self] result in
             switch result {
             case .success(let product):
-                self?.product = product
+                self?.viewState = .display(product)
                 
             case .failure(let error):
-                print(error)
+                self?.viewState = .displayError(error.localizedDescription)
             }
-            self?.isLoading = false
         }
     }
     
     func addToCart() {
-        guard let product else { return }
+        guard case let .display(product) = viewState else { return }
         cartManager.addToCart(.init(product))
         isInCart = cartManager.isInCart(product.id)
     }
     
     func toggleFavoriteState() {
-        guard let product else { return }
+        guard case let .display(product) = viewState else { return }
         favoriteManager.toggleFavoriteState(FavoriteProduct(product))
         isFavorite = favoriteManager.isFavorite(id: product.id)
     }

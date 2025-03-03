@@ -9,8 +9,6 @@ import SwiftUI
 import Kingfisher
 
 struct ProductDetailView: View {
-    @State private var isPressed = false
-    @State private var isBouncing = false
     @StateObject private var viewModel: ProductDetailViewModel
     
     init(_ viewModel: ProductDetailViewModel) {
@@ -19,10 +17,11 @@ struct ProductDetailView: View {
     
     var body: some View {
         ZStack {
-            if viewModel.isLoading {
+            switch viewModel.viewState {
+            case .loading:
                 LoadingIndicatorView()
-            }
-            else if let product = viewModel.product {
+                
+            case .display(let product):
                 GeometryReader { geo in
                     ZStack() {
                         ScrollView {
@@ -54,9 +53,8 @@ struct ProductDetailView: View {
                         }
                     }
                 }
-            }
-            else {
-                EmptyView()
+            case .displayError:
+                Text("An error occurred! Please try again")
             }
         }.onViewDidLoad {
             viewModel.fetchProduct()
@@ -64,17 +62,7 @@ struct ProductDetailView: View {
     }
 }
 
-struct PriceView: View {
-    let price: Double
-    
-    var body: some View {
-        Text("$\(price, specifier:"%.2f")")
-            .font(.title3)
-            .fontWeight(.semibold)
-            .foregroundStyle(.black)
-            .frame(maxWidth: .infinity, alignment: .leading)
-    }
-}
+
 
 struct ProductHeaderView: View {
     let product: Product

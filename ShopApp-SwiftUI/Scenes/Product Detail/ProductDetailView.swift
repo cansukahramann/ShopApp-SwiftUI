@@ -20,13 +20,7 @@ struct ProductDetailView: View {
     var body: some View {
         ZStack {
             if viewModel.isLoading {
-                ZStack {
-                    Color(.systemBackground)
-                        .ignoresSafeArea()
-                    ProgressView()
-                        .progressViewStyle(.circular)
-                        .scaleEffect(2)
-                }
+                LoadingIndicatorView()
             }
             else if let product = viewModel.product {
                 GeometryReader { geo in

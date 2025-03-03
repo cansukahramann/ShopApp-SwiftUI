@@ -22,14 +22,7 @@ struct HomeView: View {
                     .padding()
                 
                 if viewModel.isLoading {
-                    ZStack {
-                        Color(.systemBackground)
-                            .ignoresSafeArea()
-                        
-                        ProgressView()
-                            .progressViewStyle(.circular)
-                            .scaleEffect(2)
-                    }
+                    LoadingIndicatorView()
                 }
                 
             }

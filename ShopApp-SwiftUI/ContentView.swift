@@ -9,14 +9,13 @@ import SwiftUI
 
 struct ContentView: View {
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding: Bool = false
-    @StateObject private var homeViewModel = HomeViewModel()
     @StateObject private var cartViewModel = CartViewModel()
     @StateObject private var favoriteViewModel = FavoriteViewModel()
         
     var body: some View {
         if hasSeenOnboarding {
             TabView {
-                HomeView(viewModel: homeViewModel)
+                HomeView()
                     .tabItem {
                         Image(systemName: "house")
                         Text("Home")

@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct HomeView: View {
-    @ObservedObject var viewModel: HomeViewModel
     @State private var selectedProduct: Product?
     @State private var isCategoryLoadFinished = false
     @State private var isProductLoadFinished = false
@@ -35,9 +34,6 @@ struct HomeView: View {
                     isProductLoadFinished = true
                 }
                 
-            }
-            .onViewDidLoad {
-                viewModel.fetchIntialData()
             }
         }
         .overlay {

@@ -27,7 +27,6 @@ struct CartListCell: View {
                 Spacer()
                 
                 HStack(spacing: 12) {
-                  
                     StepperView(quantity: product.quantity) { newQuantitiy in
                         var updateProduct = product
                         updateProduct.quantity = newQuantitiy

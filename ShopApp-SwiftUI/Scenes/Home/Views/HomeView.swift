@@ -28,12 +28,10 @@ struct HomeView: View {
                 } onSelectedCategoryChange: { category in
                     selectedCategory = category
                 }
-
                 
                 ProductListingViewFactory.makeView(category: $selectedCategory) {
                     isProductLoadFinished = true
                 }
-                
             }
         }
         .overlay {

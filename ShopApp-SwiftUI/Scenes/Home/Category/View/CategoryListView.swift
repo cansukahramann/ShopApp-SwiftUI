@@ -8,23 +8,44 @@
 import SwiftUI
 
 struct CategoryListView: View {
-    let categories: [Category]
-    @Binding var selectedCategory: Category?
+    @StateObject private var viewModel: CategoryListViewModel
+    
+    init(_ viewModel: CategoryListViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
     
     var body: some View {
+        ZStack {
+            switch viewModel.viewState {
+            case .loading:
+                LoadingIndicatorView()
+                
+            case .display(let categories):
+                view(categories)
+                
+            case .displayError(let message):
+                ErrorView(message: message)
+            }
+        }
+        .onViewDidLoad {
+            viewModel.loadCategories()
+        }
+    }
+    
+    func view(_ categories: [Category]) -> some View {
         ScrollView(.horizontal,showsIndicators: false) {
             LazyHStack() {
                 contentInsetView(.horizontal(inset: 8))
                 
                 ForEach(categories, id: \.self) { category in
                     Button {
-                        selectedCategory = category
+                        viewModel.selectedCategory = category
                     } label: {
                         Text(category.name)
                             .font(.headline)
                             .fontWeight(.semibold)
                             .foregroundColor(.brown)
-                            .underline(selectedCategory == category, color: .brown)
+                            .underline(viewModel.selectedCategory == category, color: .brown)
                             .padding()
                             .overlay {
                                 RoundedRectangle(cornerRadius: 25)
@@ -39,8 +60,4 @@ struct CategoryListView: View {
         }
         .frame(height: 50)
     }
-}
-
-#Preview {
-    CategoryListView(categories: [.init(name:"All"), .init(name: "Popular")], selectedCategory: .constant(.init(name: "All")))
 }

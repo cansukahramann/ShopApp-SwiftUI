@@ -16,6 +16,7 @@ struct EmptyFavoriteView: View {
                     lottieAnimation.contentMode = .scaleAspectFit
                  })
                 .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
+                .animationDidFinish { completed in }
                 .frame(height: 250)
 
             Text("Your favorites list is empty. Start saving your favorite products for quick access!")

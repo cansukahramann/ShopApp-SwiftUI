@@ -15,6 +15,7 @@ struct EmptyCartView: View {
                 lottieAnimation.contentMode = .scaleAspectFit
              })
             .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
+            .animationDidFinish { completed in }
     }
 }
 

@@ -15,14 +15,27 @@ struct SearchBar: View {
             TextField("Search", text: $search)
                 .font(.subheadline)
                 .foregroundStyle(.gray)
+                .id(UUID()) // Her değişimde TextField'in yenilenmesini sağlıyor.
+            
             Spacer()
-            Image(systemName: "magnifyingglass")
+            
+            if !search.isEmpty {
+                Button(action: {
+                    search = "" // Arama çubuğunu temizle
+                }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundStyle(.gray)
+                }
+            } else {
+                Image(systemName: "magnifyingglass")
+                    .foregroundStyle(.gray)
+            }
         }
         .padding()
-        .overlay(content: {
+        .overlay(
             RoundedRectangle(cornerRadius: 12)
                 .stroke(lineWidth: 1)
                 .foregroundStyle(Color(.systemGray4))
-        })
+        )
     }
 }

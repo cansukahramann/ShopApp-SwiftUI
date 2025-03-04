@@ -32,7 +32,7 @@ struct BannerListView: View {
         }
         .frame(height: 150)
         .navigationDestination(item: $top) { _ in
-            PromotedProductsViewFactory.makePreviewView()
+            PromotedProductsViewFactory.makeView()
         }
     }
 }

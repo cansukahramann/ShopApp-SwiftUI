@@ -23,22 +23,29 @@ final class FavoriteManager {
     }
     
     func toggleFavoriteState(_ favoriteProduct: FavoriteProduct) {
-        if isFavorite(id: favoriteProduct.id) {
-            removeFavorite(favoriteProduct)
-        } else {
-            addToFavorite(favoriteProduct)
+        performOperationThenSave {
+            if isFavorite(id: favoriteProduct.id) {
+                removeFavorite(favoriteProduct)
+            } else {
+                addToFavorite(favoriteProduct)
+            }
         }
-        
-        saveToDisk()
     }
     
     private func addToFavorite( _ favoriteProduct: FavoriteProduct) {
-        favorites.append(favoriteProduct)
-        saveToDisk()
+        performOperationThenSave {
+            favorites.append(favoriteProduct)
+        }
     }
     
     private func removeFavorite( _ favoriteProduct: FavoriteProduct) {
-        favorites.removeAll { $0 == favoriteProduct }
+        performOperationThenSave {
+            favorites.removeAll { $0 == favoriteProduct }
+        }
+    }
+    
+    private func performOperationThenSave(_ operation: () -> Void) {
+        operation()
         saveToDisk()
     }
     

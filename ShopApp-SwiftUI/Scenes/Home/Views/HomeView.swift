@@ -16,7 +16,7 @@ struct HomeView: View {
             LazyVStack(spacing: 12) {
                 BannerListView()
                 
-                CategoryListView(categories: viewModel.categories, selectedCategory: $viewModel.selectedCategory)
+//                CategoryListView(viewModel)
                 
                 ProductListView(products: viewModel.products, selectedProduct: $selectedProduct)
                     .padding()

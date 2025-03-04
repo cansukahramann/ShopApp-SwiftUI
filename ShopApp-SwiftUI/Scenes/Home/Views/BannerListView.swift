@@ -36,7 +36,3 @@ struct BannerListView: View {
         }
     }
 }
-
-#Preview {
-    BannerListView()
-}

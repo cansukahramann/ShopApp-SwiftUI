@@ -15,8 +15,6 @@ final class ProductListingViewModel: ObservableObject {
     init(loader: ProductLoader, onLoadFinish: @escaping () -> Void) {
         self.loader = loader
         self.onLoadFinish = onLoadFinish
-        
-        print("product listing vm init")
     }
     
     func fetchProducts(for category: Category?) {

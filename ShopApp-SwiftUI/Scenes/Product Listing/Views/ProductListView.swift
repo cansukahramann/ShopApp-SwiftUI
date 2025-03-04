@@ -31,7 +31,3 @@ struct ProductListView: View {
         ProductCardModel(image: product.image, title: product.title, rate: product.rating?.rate ?? 0, rateCount: product.rating?.count ?? 0, price: product.price)
     }
 }
-
-#Preview {
-    ProductListView(products: [], selectedProduct: .constant(nil))
-}

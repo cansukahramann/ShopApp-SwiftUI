@@ -62,7 +62,6 @@ struct ProductDetailView: View {
                 }
             }
         }
-        
     }
 }
 

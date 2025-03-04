@@ -33,7 +33,6 @@ struct LastOnboardingScreen: View {
                         .shadow(radius: 3)
                 }
                 .padding(.bottom, 100)
-                
             }
         }
     }

@@ -15,13 +15,12 @@ struct SearchBar: View {
             TextField("Search", text: $search)
                 .font(.subheadline)
                 .foregroundStyle(.gray)
-                .id(UUID()) // Her değişimde TextField'in yenilenmesini sağlıyor.
-            
+
             Spacer()
             
             if !search.isEmpty {
                 Button(action: {
-                    search = "" // Arama çubuğunu temizle
+                    search = ""
                 }) {
                     Image(systemName: "xmark.circle.fill")
                         .foregroundStyle(.gray)

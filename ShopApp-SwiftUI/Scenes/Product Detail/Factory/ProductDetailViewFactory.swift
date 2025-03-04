@@ -10,15 +10,17 @@ import SwiftUI
 final class ProductDetailViewFactory {
     private init() {}
     
-    static func makeProductDetailView(_ id: Int) -> some View {
-        let service = ProductService()
-        let dataLoader = DetailDataLoader(productService: service, id: id)
-        let viewModel = ProductDetailViewModel(
-            id: id,
-            dataLoader: dataLoader,
-            cartManager: .shared,
-            favoriteManager: .shared
-        )
-        return ProductDetailView(viewModel)
+    static func makeProductDetailView(_ id: Int) -> ProductDetailView {
+        ProductDetailView(viewModel: {
+            let service = ProductService()
+            let dataLoader = DetailDataLoader(productService: service, id: id)
+            let viewModel = ProductDetailViewModel(
+                id: id,
+                dataLoader: dataLoader,
+                cartManager: .shared,
+                favoriteManager: .shared
+            )
+            return viewModel
+        })
     }
 }

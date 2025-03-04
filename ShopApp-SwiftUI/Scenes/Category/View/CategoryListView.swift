@@ -8,11 +8,7 @@
 import SwiftUI
 
 struct CategoryListView: View {
-    @StateObject private var viewModel: CategoryListViewModel
-    
-    init(_ viewModel: CategoryListViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
+    @StateObject var viewModel: CategoryListViewModel
     
     var body: some View {
         ZStack {

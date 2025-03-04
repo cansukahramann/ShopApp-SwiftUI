@@ -12,8 +12,8 @@ struct ProductListingView: View {
     @State private var selectedPorduct: Product?
     @Binding var category: Category?
     
-    init(viewModel: ProductListingViewModel, category: Binding<Category?>) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+    init(viewModel: @escaping () -> ProductListingViewModel, category: Binding<Category?>) {
+        _viewModel = StateObject(wrappedValue: viewModel())
         _category = category
     }
     

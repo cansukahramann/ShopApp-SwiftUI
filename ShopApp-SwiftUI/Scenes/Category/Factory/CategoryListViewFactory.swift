@@ -11,10 +11,11 @@ final class CategoryListViewFactory {
     private init() {}
     
     static func makeView(onLoadFinish: @escaping () -> Void, onSelectedCategoryChange: @escaping (Category?) -> Void) -> some View {
-        let service = CategoryService()
-        let loader = CategoryLoader(service: service)
-        let viewModel = CategoryListViewModel(loader: loader, onLoadFinish: onLoadFinish, onSelectedCategoryChange: onSelectedCategoryChange)
-        let view = CategoryListView(viewModel)
-        return view
+        CategoryListView(viewModel: {
+            let service = CategoryService()
+            let loader = CategoryLoader(service: service)
+            let viewModel = CategoryListViewModel(loader: loader, onLoadFinish: onLoadFinish, onSelectedCategoryChange: onSelectedCategoryChange)
+            return viewModel
+        }())
     }
 }

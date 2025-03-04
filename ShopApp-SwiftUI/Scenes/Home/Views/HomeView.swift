@@ -23,15 +23,15 @@ struct HomeView: View {
             LazyVStack(spacing: 12) {
                 BannerListView()
                 
-                CategoryListViewFactory.makeView {
+                CategoryListViewFactory.makeView(onLoadFinish: {
                     isCategoryLoadFinished = true
-                } onSelectedCategoryChange: { category in
+                }, onSelectedCategoryChange: { category in
                     selectedCategory = category
-                }
+                })
                 
-                ProductListingViewFactory.makeView(category: $selectedCategory) {
+                ProductListingViewFactory.makeView(category: $selectedCategory, onLoadFinish: {
                     isProductLoadFinished = true
-                }
+                })
             }
         }
         .overlay {

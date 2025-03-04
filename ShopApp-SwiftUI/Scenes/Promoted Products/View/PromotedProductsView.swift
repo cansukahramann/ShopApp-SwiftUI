@@ -11,8 +11,8 @@ struct PromotedProductsView: View {
     @StateObject private var viewModel: PromotedProductsViewModel
     @State private var selectedProduct: Product?
     
-    init(viewModel: PromotedProductsViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+    init(viewModel: @escaping () -> PromotedProductsViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel())
     }
     
     var body: some View {

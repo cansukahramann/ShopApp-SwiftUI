@@ -11,19 +11,21 @@ final class PromotedProductsViewFactory {
     private init() {}
     
     static func makeView() -> some View {
-        let service = ProductService()
-        let loader = PromotedProductsLoader(service: service)
-        let viewModel = PromotedProductsViewModel(loader: loader)
-        let view = PromotedProductsView(viewModel: viewModel)
-        return view
+        PromotedProductsView(viewModel: {
+            let service = ProductService()
+            let loader = PromotedProductsLoader(service: service)
+            let viewModel = PromotedProductsViewModel(loader: loader)
+            return viewModel
+        })
     }
     
     static func makePreviewView() -> some View {
-        let succesfullLoader = FakePromotedProductsLoader(result: .success(makeTestProduct()))
-        let failedLoader = FakePromotedProductsLoader(result: .failure(NSError(domain: "Error", code: 0)))
-        let viewModel = PromotedProductsViewModel(loader: succesfullLoader)
-        let view = PromotedProductsView(viewModel: viewModel)
-        return view
+        PromotedProductsView(viewModel: {
+            let succesfullLoader = FakePromotedProductsLoader(result: .success(makeTestProduct()))
+            let failedLoader = FakePromotedProductsLoader(result: .failure(NSError(domain: "Error", code: 0)))
+            let viewModel = PromotedProductsViewModel(loader: succesfullLoader)
+            return viewModel
+        })
     }
 }
 

@@ -11,8 +11,8 @@ import Kingfisher
 struct ProductDetailView: View {
     @StateObject private var viewModel: ProductDetailViewModel
     
-    init(_ viewModel: ProductDetailViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+    init(viewModel: @escaping () -> ProductDetailViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel())
     }
     
     var body: some View {
@@ -65,8 +65,6 @@ struct ProductDetailView: View {
         
     }
 }
-
-
 
 struct ProductHeaderView: View {
     let product: Product

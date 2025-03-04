@@ -9,12 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding: Bool = false
-    @StateObject private var cartViewModel = CartViewModel()
-    @StateObject private var favoriteViewModel = FavoriteViewModel()
     
     var body: some View {
         if hasSeenOnboarding {
-            MainTabView(cartViewModel: cartViewModel, favoriteViewModel: favoriteViewModel)
+            MainTabView()
         } else {
             OnboardingView(hasSeenOnboarding: $hasSeenOnboarding)
                 .ignoresSafeArea()
@@ -23,8 +21,8 @@ struct ContentView: View {
 }
 
 struct MainTabView: View {
-    @ObservedObject var cartViewModel: CartViewModel
-    @ObservedObject var favoriteViewModel: FavoriteViewModel
+    @StateObject private var cartViewModel = CartViewModel()
+    @StateObject private var favoriteViewModel = FavoriteViewModel()
     
     var body: some View {
         TabView {

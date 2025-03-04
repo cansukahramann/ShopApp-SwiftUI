@@ -22,19 +22,7 @@ struct CartListCell: View {
                 .clipped()
             
             VStack(alignment: .leading) {
-                VStack(alignment: .leading, spacing: 12) {
-                    Text(product.product.title)
-                        .font(.title3)
-                        .fontWeight(.medium)
-                    HStack {
-                        Image(systemName: "truck.box")
-                            .frame(width: 12, height: 12)
-                        
-                        Text("Ships by tomorrow!")
-                            .font(.footnote)
-                    }
-                    .foregroundStyle(Color.green)
-                }
+                ProductInfoView(title: product.product.title)
                 
                 Spacer()
                 
@@ -50,6 +38,26 @@ struct CartListCell: View {
                 }
             }
             .padding(20)
+        }
+    }
+}
+
+struct ProductInfoView: View {
+    var title: String
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text(title)
+                .font(.title3)
+                .fontWeight(.medium)
+            HStack {
+                Image(systemName: "truck.box")
+                    .frame(width: 12, height: 12)
+                
+                Text("Ships by tomorrow!")
+                    .font(.footnote)
+            }
+            .foregroundStyle(Color.green)
         }
     }
 }
